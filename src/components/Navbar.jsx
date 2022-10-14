@@ -1,4 +1,5 @@
 import { Popover } from "@mantine/core";
+
 import FeaturesContainer from "./Navbar/FeaturesContainer";
 import ResourcesContainer from "./Navbar/ResourcesContainer";
 
@@ -123,7 +124,7 @@ const Navbar = ({
         </a>
         <a
           href="/"
-          className="rounded-md px-3 py-2 bg-purple-400 mt-0 ml-4 hover:bg-purple-500 shadow-md border-black"
+          className="rounded-md px-3 py-2 bg-sky-400 mt-0 ml-4 hover:bg-sky-500 shadow-md border-black"
         >
           Sign up
         </a>
