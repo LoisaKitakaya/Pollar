@@ -1,7 +1,7 @@
 const Intro = () => {
   return (
     <div className="pt-2">
-      <div className="px-16 py-10 flex items-center">
+      <div className="px-16 py-10 flex items-center w-fit m-auto">
         <div className="px-2">
           <h1 className="text-5xl">Integrity based online voting app</h1>
           <br />
@@ -12,14 +12,13 @@ const Intro = () => {
           <br />
           <a
             href="/"
-            className="rounded-md py-2 px-4 bg-emerald-300 hover:bg-emerald-400"
+            className="rounded-md shadow-md border-black py-2 px-4 bg-emerald-300 hover:bg-emerald-400"
           >
             Contact us
           </a>
         </div>
         <img
-          className="w-2/4"
-          src="https://res.cloudinary.com/dit0fii18/image/upload/v1665632629/documents/logos/logo_rxdjow.png"
+          src="https://res.cloudinary.com/dit0fii18/image/upload/v1665759533/documents/logos/logo_resize_vhwcgm.png"
           alt="intro"
         />
       </div>

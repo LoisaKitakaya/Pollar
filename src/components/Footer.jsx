@@ -5,10 +5,12 @@ const Footer = () => {
         <a href="/" className="flex items-center">
           <img
             className="w-32"
-            src="https://res.cloudinary.com/dit0fii18/image/upload/v1665714259/documents/logos/logo_pollar_bird_hnflza.png"
+            src="https://res.cloudinary.com/dit0fii18/image/upload/v1665759533/documents/logos/logo_pollar_bird_resize_zfvonv.png"
             alt="logo"
           />
-          <span className="ml-4 text-6xl header-font">Pollar</span>
+          <span className="ml-4 text-6xl header-font text-yellow-900 font-semibold pt-1">
+            Pollar
+          </span>
         </a>
         <div>
           <a href="/" className="text-lg px-4 hover:text-blue-900">
