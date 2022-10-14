@@ -1,0 +1,57 @@
+{
+  "features": [
+    {
+      "icon": "https://img.icons8.com/cotton/64/000000/certificate--v1.png",
+      "title": "Nominations Services",
+      "slug": "nomination",
+      "summary": "We offer nominations services, which streamlines the process of selecting candidates before the election. Members can easily nominate someone through online petitions or simple forms that only require an email address."
+    },
+    {
+      "icon": "https://img.icons8.com/cotton/64/000000/box--v3.png",
+      "title": "Ballot Features",
+      "slug": "ballot",
+      "summary": "As a reputable voting management agency, we offer customizable online ballots that meet your organization’s needs. These ballots include the number of open positions, candidate biographies and pictures, and an option for write-in candidates."
+    },
+    {
+      "icon": "https://img.icons8.com/officel/80/000000/settings-3.png",
+      "title": "Full-Service Management",
+      "slug": "management",
+      "summary": "Our system provides a seamless election experience, so members of your organization shouldn’t have to lift a finger, except to participate in the vote."
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/twitter.png",
+      "title": "Social Media Integration",
+      "slug": "socialmedia",
+      "summary": "Share election results directly to LinkedIn, Facebook, Instagram, or Twitter and encourage fellow members to do the same. This contemporary tool can increase voter turnout. "
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/stop-property.png",
+      "title": "Tracking & Tabulation",
+      "slug": "tracking",
+      "summary": "Tracking and tabulation features so you can view results in real time. You can review the votes as they come in and once the digital election has come to a close, view tabulation of thr results with additional analyses upon request."
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/user-credentials.png",
+      "title": "Security",
+      "summary": "Security has always been a top priority for Pollar. We offers a wide range of protection options. Each member is only allowed to vote once through the system and ballots remain secret. We guarantee your organization’s information will not be shared with third parties."
+    }
+  ],
+  "resources": [
+    {
+      "icon": "https://img.icons8.com/office/80/000000/blog.png",
+      "title": "Blog"
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/lifebuoy.png",
+      "title": "Help center"
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/user-manual.png",
+      "title": "Use cases"
+    },
+    {
+      "icon": "https://img.icons8.com/office/80/000000/good-quality--v1.png",
+      "title": "Success stories"
+    }
+  ]
+}
