@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Raleway&display=swap");
 
 body,
-html {
-  font-family: "Raleway", sans-serif;
+html,
+.global-font {
+  font-family: "Raleway", sans-serif !important;
+}
+
+.header-font {
+  font-family: "Fuzzy Bubbles", cursive !important;
 }

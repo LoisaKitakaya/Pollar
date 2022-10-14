@@ -16,7 +16,7 @@ const Navbar = ({
           src="https://res.cloudinary.com/dit0fii18/image/upload/v1665714259/documents/logos/logo_pollar_bird_hnflza.png"
           alt="logo"
         />
-        <h1 className="text-3xl ml-2">Pollar</h1>
+        <h1 className="text-3xl ml-2 header-font">Pollar</h1>
       </a>
 
       <div className="flex items-center">
