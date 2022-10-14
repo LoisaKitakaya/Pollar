@@ -13,10 +13,12 @@ const Navbar = ({
       <a href="/" className="flex items-center">
         <img
           className="w-14"
-          src="https://res.cloudinary.com/dit0fii18/image/upload/v1665714259/documents/logos/logo_pollar_bird_hnflza.png"
+          src="https://res.cloudinary.com/dit0fii18/image/upload/v1665759533/documents/logos/logo_pollar_bird_resize_zfvonv.png"
           alt="logo"
         />
-        <h1 className="text-3xl ml-2 header-font">Pollar</h1>
+        <h1 className="text-3xl ml-2 header-font text-yellow-900 font-semibold pt-1">
+          Pollar
+        </h1>
       </a>
 
       <div className="flex items-center">
@@ -115,13 +117,13 @@ const Navbar = ({
       <div className="flex items-center">
         <a
           href="/"
-          className="rounded-md px-3 py-2 bg-emerald-300 mt-0 ml-4 hover:bg-emerald-400"
+          className="rounded-md px-3 py-2 bg-emerald-300 mt-0 ml-4 hover:bg-emerald-400 shadow-md border-black"
         >
           Log in
         </a>
         <a
           href="/"
-          className="rounded-md px-3 py-2 bg-blue-400 mt-0 ml-4 hover:bg-blue-500"
+          className="rounded-md px-3 py-2 bg-purple-400 mt-0 ml-4 hover:bg-purple-500 shadow-md border-black"
         >
           Sign up
         </a>

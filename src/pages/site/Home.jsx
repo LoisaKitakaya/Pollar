@@ -7,8 +7,11 @@ import KeyFeatures from "../../components/Home/KeyFeatures";
 import Market from "../../components/Home/Market";
 import Support from "../../components/Home/Support";
 import Navbar from "../../components/Navbar";
+import PageTitle from "../../pageTitle";
 
 const Home = () => {
+  PageTitle("Home");
+  
   const [features, setFeaturesState] = useState(false);
   const [resources, setResourcesState] = useState(false);
 

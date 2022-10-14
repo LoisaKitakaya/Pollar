@@ -13,7 +13,7 @@ const Support = () => {
         <br />
         <a
           href="/"
-          className="border rounded-lg bg-emerald-300 hover:bg-emerald-400 p-4"
+          className="shadow-md border-black rounded-lg bg-emerald-300 hover:bg-emerald-400 p-4"
         >
           Get free consultation
         </a>
