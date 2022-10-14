@@ -8,7 +8,7 @@ const Home = () => {
   const [resources, setResourcesState] = useState(false);
 
   return (
-    <div className="bg-gray-100">
+    <div>
       {/* navigation */}
       <Navbar
         featureState={features}
@@ -19,7 +19,7 @@ const Home = () => {
       {/* navigation */}
 
       {/* body */}
-      <div onClick={() => setFeaturesState(false)}></div>
+      <div></div>
       {/* body */}
 
       {/* body */}

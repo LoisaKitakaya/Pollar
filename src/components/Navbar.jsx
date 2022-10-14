@@ -1,4 +1,6 @@
 import { Popover } from "@mantine/core";
+import FeaturesContainer from "./Navbar/FeaturesContainer";
+import ResourcesContainer from "./Navbar/ResourcesContainer";
 
 const Navbar = ({
   featureState,
@@ -19,7 +21,7 @@ const Navbar = ({
 
       <div className="flex items-center">
         <Popover
-          width={700}
+          width={375}
           position="bottom"
           withArrow
           shadow="md"
@@ -28,7 +30,7 @@ const Navbar = ({
         >
           <Popover.Target>
             <p
-              className="text-lg mx-4 hover:cursor-pointer"
+              className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900"
               onClick={() => setFeatureState((o) => !o)}
             >
               <span className="flex items-center">
@@ -51,19 +53,23 @@ const Navbar = ({
             </p>
           </Popover.Target>
 
-          <Popover.Dropdown>Dropdown</Popover.Dropdown>
+          <Popover.Dropdown>
+            {/* features container */}
+            <FeaturesContainer />
+            {/* features container */}
+          </Popover.Dropdown>
         </Popover>
         {/* <a href="/" className="text-xl pt-1 mx-4">
           Features
         </a> */}
-        <a href="/" className="text-lg mx-4">
+        <a href="/" className="text-lg mx-4 hover:text-blue-900">
           Pricing
         </a>
-        <a href="/" className="text-lg mx-4">
+        <a href="/" className="text-lg mx-4 hover:text-blue-900">
           What's New
         </a>
         <Popover
-          width={700}
+          width={250}
           position="bottom"
           withArrow
           shadow="md"
@@ -72,7 +78,7 @@ const Navbar = ({
         >
           <Popover.Target>
             <p
-              className="text-lg mx-4 hover:cursor-pointer"
+              className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900"
               onClick={() => setResourcesState((o) => !o)}
             >
               <span className="flex items-center">
@@ -95,7 +101,11 @@ const Navbar = ({
             </p>
           </Popover.Target>
 
-          <Popover.Dropdown>Dropdown</Popover.Dropdown>
+          <Popover.Dropdown>
+            {/* resource container */}
+            <ResourcesContainer />
+            {/* resource container */}
+          </Popover.Dropdown>
         </Popover>
         {/* <a href="/" className="text-xl pt-1 mx-4">
           Resources
