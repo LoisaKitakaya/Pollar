@@ -7,7 +7,11 @@ const features = data.features;
 const FeaturesContainer = () => {
   return (
     <div>
-      <Accordion variant="filled" radius="xs" defaultValue="customization">
+      <Accordion
+        className="global-font"
+        radius="xs"
+        defaultValue="customization"
+      >
         {features.map((feature, index) => {
           const list = (
             <>
