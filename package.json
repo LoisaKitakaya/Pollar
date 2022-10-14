@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
     "@mantine/carousel": "^5.5.5",
     "@mantine/core": "^5.5.5",
     "@mantine/dates": "^5.5.5",
@@ -23,6 +25,7 @@
     "embla-carousel-react": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },

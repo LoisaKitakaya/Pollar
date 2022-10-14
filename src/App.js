@@ -1,27 +1,14 @@
-import { Button, Breadcrumbs, Anchor } from "@mantine/core";
+import { Routes, Route } from "react-router-dom";
+import Console from "./pages/app/Console";
 
-const items = [
-  { title: "Mantine", href: "#" },
-  { title: "Mantine hooks", href: "#" },
-  { title: "use-id", href: "#" },
-].map((item, index) => (
-  <Anchor href={item.href} key={index}>
-    {item.title}
-  </Anchor>
-));
+import Home from "./pages/site/Home";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">App is working.</h1>
-      <br />
-      <Button>Click me!</Button>
-      <br />
-      <>
-        <Breadcrumbs>{items}</Breadcrumbs>
-        <Breadcrumbs separator="→">{items}</Breadcrumbs>
-      </>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/app/console/" element={<Console />} />
+    </Routes>
   );
 };
 
