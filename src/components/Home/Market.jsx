@@ -18,10 +18,10 @@ const Market = () => {
             alt="content"
           />
           <div className="p-4">
-            <h1 className="text-2xl mb-4">
+            <h1 className="text-2xl w-3/4 mx-auto mb-4">
               Full transparency and verifiability of elections
             </h1>
-            <p className="text-lg">
+            <p className="text-lg w-3/4 m-auto">
               The Polys system is based on blockchain technology, which makes
               voting secure and immutable. All data that enters the blockchain
               (votes and voting results) cannot be replaced or deleted.
@@ -30,10 +30,10 @@ const Market = () => {
         </div>
         <div className="flex items-center w-fit m-auto p-10">
           <div className="p-4">
-            <h1 className="text-2xl mb-4 text-right">
+            <h1 className="text-2xl w-3/4 mx-auto mb-4">
               Security at every stage
             </h1>
-            <p className="text-lg text-right">
+            <p className="text-lg w-3/4 m-auto">
               Cryptography is an important component that ensures the security
               of our solution: we protect elections from interference by any
               third party, including Polys.
@@ -52,8 +52,10 @@ const Market = () => {
             alt="content"
           />
           <div className="p-4">
-            <h1 className="text-2xl mb-4">Availability for all voters</h1>
-            <p className="text-lg">
+            <h1 className="text-2xl w-3/4 mx-auto mb-4">
+              Availability for all voters
+            </h1>
+            <p className="text-lg w-3/4 m-auto">
               Voting from a digital device eliminates the need for voters to
               travel to a polling station. This can have a positive impact on
               voter turnout.
