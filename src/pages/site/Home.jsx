@@ -1,6 +1,11 @@
 import { useState } from "react";
 
 import Footer from "../../components/Footer";
+import HowPollarWorks from "../../components/Home/HowPollarWorks";
+import Intro from "../../components/Home/Intro";
+import KeyFeatures from "../../components/Home/KeyFeatures";
+import Market from "../../components/Home/Market";
+import Support from "../../components/Home/Support";
 import Navbar from "../../components/Navbar";
 
 const Home = () => {
@@ -19,7 +24,27 @@ const Home = () => {
       {/* navigation */}
 
       {/* body */}
-      <div></div>
+
+      {/* body component */}
+      <Intro />
+      {/* body component */}
+
+      {/* body component */}
+      <Market />
+      {/* body component */}
+
+      {/* body component */}
+      <KeyFeatures />
+      {/* body component */}
+
+      {/* body component */}
+      <Support />
+      {/* body component */}
+
+      {/* body component */}
+      <HowPollarWorks />
+      {/* body component */}
+
       {/* body */}
 
       {/* body */}

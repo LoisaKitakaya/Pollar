@@ -10,7 +10,7 @@
       "icon": "https://img.icons8.com/cotton/64/000000/box--v3.png",
       "title": "Ballot Features",
       "slug": "ballot",
-      "summary": "We offer customizable online ballots that meet your organization’s needs. These ballots include the number of open positions, candidate biographies and pictures, and an option for write-in candidates."
+      "summary": "As a reputable voting management agency, we offer customizable online ballots that meet your organization’s needs. These ballots include the number of open positions, candidate biographies and pictures, and an option for write-in candidates."
     },
     {
       "icon": "https://img.icons8.com/officel/80/000000/settings-3.png",
@@ -33,25 +33,7 @@
     {
       "icon": "https://img.icons8.com/office/80/000000/user-credentials.png",
       "title": "Security",
-      "summary": "Security has always been a top priority for Pollar. We offers a wide range of protection options. Each member is only allowed to vote once. We guarantee your organization’s information will not be shared with third parties."
-    }
-  ],
-  "resources": [
-    {
-      "icon": "https://img.icons8.com/office/80/000000/blog.png",
-      "title": "Blog"
-    },
-    {
-      "icon": "https://img.icons8.com/office/80/000000/lifebuoy.png",
-      "title": "Help center"
-    },
-    {
-      "icon": "https://img.icons8.com/office/80/000000/user-manual.png",
-      "title": "Use cases"
-    },
-    {
-      "icon": "https://img.icons8.com/office/80/000000/good-quality--v1.png",
-      "title": "Success stories"
+      "summary": "Security has always been a top priority for Pollar. We offers a wide range of protection options. Each member is only allowed to vote once through the system and ballots remain secret. We guarantee your organization’s information will not be shared with third parties."
     }
   ]
 }

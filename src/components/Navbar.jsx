@@ -9,7 +9,7 @@ const Navbar = ({
   setResourcesState,
 }) => {
   return (
-    <div className="flex items-center justify-between px-16 py-1">
+    <div className="flex items-center justify-between px-16 py-1 shadow-lg bg-slate-100">
       <a href="/" className="flex items-center">
         <img
           className="w-14"

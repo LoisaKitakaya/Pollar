@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="py-4 bg-gray-100">
+    <div className="py-4 bg-slate-200">
       <div className="flex items-center justify-around px-16 py-2">
         <a href="/" className="flex items-center">
           <img
