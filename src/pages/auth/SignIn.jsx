@@ -1,14 +1,41 @@
+import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import Footer from "../../components/Footer";
 
+import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import PageTitle from "../../pageTitle";
+
+const TOKEN_AUTH = gql`
+  mutation TokenAuth($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+      refreshToken
+      payload
+      refreshExpiresIn
+    }
+  }
+`;
 
 const SignIn = () => {
   PageTitle("Sign in");
 
   const [features, setFeaturesState] = useState(false);
   const [resources, setResourcesState] = useState(false);
+
+  const [tokenAuth, { data, loading, error }] = useMutation(TOKEN_AUTH);
+
+  if (data) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+
+    localStorage.setItem("token", data.tokenAuth.token);
+    localStorage.setItem("refreshToken", data.tokenAuth.refreshToken);
+
+    console.log(data);
+    console.log("Account logged in successfully.");
+  }
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
 
   return (
     <div>
@@ -25,7 +52,19 @@ const SignIn = () => {
       <div className="min-h-fit">
         <div className="bg-zinc-100 rounded-lg shadow-md border p-4 w-2/5 mx-auto my-20">
           <h1 className="text-xl text-center mb-4">Log in to account</h1>
-          <form className="px-4">
+          <form
+            className="px-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              tokenAuth({
+                variables: {
+                  username: e.target.username.value,
+                  password: e.target.password.value,
+                },
+              });
+            }}
+          >
             <label htmlFor="username" className="block mb-4">
               <span className="text-gray-700">
                 Username<span className="text-red-700 text-3xl">*</span>
