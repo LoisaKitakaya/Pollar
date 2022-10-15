@@ -1,13 +1,13 @@
 {
   "features": [
     {
-      "icon": "https://img.icons8.com/cotton/64/000000/certificate--v1.png",
+      "icon": "https://img.icons8.com/officel/80/000000/certificate.png",
       "title": "Nominations Services",
       "slug": "nomination",
       "summary": "We offer nominations services, which streamlines the process of selecting candidates before the election. Members can easily nominate someone through online petitions or simple forms that only require an email address."
     },
     {
-      "icon": "https://img.icons8.com/cotton/64/000000/box--v3.png",
+      "icon": "https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-vote-politics-flaticons-flat-flat-icons.png",
       "title": "Ballot Features",
       "slug": "ballot",
       "summary": "We offer customizable online ballots that meet your organization’s needs. These ballots include the number of open positions, candidate biographies and pictures, and an option for write-in candidates."

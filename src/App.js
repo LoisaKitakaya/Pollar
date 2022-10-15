@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
+
 import Console from "./pages/app/Console";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-
 import Home from "./pages/site/Home";
+
 
 const App = () => {
   return (

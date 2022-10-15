@@ -12,11 +12,11 @@ const ResourcesContainer = () => {
           <>
             <a
               href="/"
-              className="flex items-center hover:text-blue-900"
+              className="flex items-center p-4 hover:text-blue-900 hover:bg-zinc-100"
               key={index}
             >
-              <Avatar src={resource.icon} className="ml-4 mb-2" alt="it's me" />
-              <span className="ml-8">{resource.title}</span>
+              <Avatar src={resource.icon} className="" alt="it's me" />
+              <span className="ml-4">{resource.title}</span>
             </a>
           </>
         );
