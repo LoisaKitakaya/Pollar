@@ -32,7 +32,7 @@ const Intersection = () => {
               withArrow
             >
               <a
-                href="/"
+                href="/auth/accounts/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
@@ -86,11 +86,7 @@ const Intersection = () => {
             </Tooltip>
           </div>
           <div className="w-1-4 h-1-4 m-2 rounded-md drop-shadow-lg hover:drop-shadow-xl border border-gray-400 hover:border-gray-900 bg-zinc-200 hover:bg-zinc-400">
-            <Tooltip
-              label="I have an organizer account"
-              color="teal"
-              withArrow
-            >
+            <Tooltip label="I have an organizer account" color="teal" withArrow>
               <a
                 href="/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"

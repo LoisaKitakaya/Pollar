@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -37,6 +38,8 @@ const REGISTER_USER_ACCOUNT = gql`
 const SignUp = () => {
   PageTitle("Sign up");
 
+  const navigate = useNavigate();
+
   const [features, setFeaturesState] = useState(false);
   const [resources, setResourcesState] = useState(false);
 
@@ -45,8 +48,9 @@ const SignUp = () => {
   );
 
   if (data) {
-    console.log(data)
+    console.log(data);
     console.log("Account creation success.You can now log in.");
+    navigate('/auth/signin/')
   }
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
