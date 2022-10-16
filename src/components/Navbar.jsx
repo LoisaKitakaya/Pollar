@@ -1,4 +1,6 @@
 import { Popover } from "@mantine/core";
+import { useEffect, useState } from "react";
+import LogOut from "./Accounts/LogOut";
 
 import FeaturesContainer from "./Navbar/FeaturesContainer";
 import ResourcesContainer from "./Navbar/ResourcesContainer";
@@ -9,6 +11,14 @@ const Navbar = ({
   resourcesState,
   setResourcesState,
 }) => {
+  const [status, setStatus] = useState(false);
+
+  useEffect(() => {
+    setStatus(localStorage.getItem("authenticated"));
+
+    console.log(status);
+  }, [status]);
+
   return (
     <div className="flex items-center justify-between px-16 py-1 shadow-lg bg-slate-100">
       <a href="/" className="flex items-center">
@@ -116,18 +126,32 @@ const Navbar = ({
       </div>
 
       <div className="flex items-center">
-        <a
-          href="/auth/signin/"
-          className="rounded-md px-3 py-2 bg-emerald-300 mt-0 ml-4 hover:bg-emerald-400 shadow-md border-black"
-        >
-          Log in
-        </a>
-        <a
-          href="/auth/signup/"
-          className="rounded-md px-3 py-2 bg-sky-400 mt-0 ml-4 hover:bg-sky-500 shadow-md border-black"
-        >
-          Sign up
-        </a>
+        {status ? (
+          <>
+            <a
+              href="/intersection/"
+              className="rounded-md px-3 py-2 bg-gray-500 mt-0 ml-4 hover:bg-gray-600 shadow-md border-black text-white"
+            >
+              Console
+            </a>
+            <LogOut />
+          </>
+        ) : (
+          <>
+            <a
+              href="/auth/signin/"
+              className="rounded-md px-3 py-2 bg-emerald-300 mt-0 ml-4 hover:bg-emerald-400 shadow-md border-black"
+            >
+              Log in
+            </a>
+            <a
+              href="/auth/signup/"
+              className="rounded-md px-3 py-2 bg-sky-400 mt-0 ml-4 hover:bg-sky-500 shadow-md border-black"
+            >
+              Sign up
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

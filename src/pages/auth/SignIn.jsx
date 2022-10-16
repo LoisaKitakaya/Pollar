@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import Footer from "../../components/Footer";
@@ -19,6 +20,8 @@ const TOKEN_AUTH = gql`
 const SignIn = () => {
   PageTitle("Sign in");
 
+  const navigate = useNavigate()
+
   const [features, setFeaturesState] = useState(false);
   const [resources, setResourcesState] = useState(false);
 
@@ -27,12 +30,16 @@ const SignIn = () => {
   if (data) {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("authenticated")
 
     localStorage.setItem("token", data.tokenAuth.token);
     localStorage.setItem("refreshToken", data.tokenAuth.refreshToken);
+    localStorage.setItem("authenticated", true)
 
     console.log(data);
     console.log("Account logged in successfully.");
+
+    navigate('/intersection/')
   }
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
