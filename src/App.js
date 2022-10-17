@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Console from "./pages/app/Console";
+import OrganizerConsole from "./pages/app/OrganizerConsole";
+import VoterConsole from "./pages/app/VoterConsole";
 import Accounts from "./pages/auth/Accounts";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
@@ -12,10 +13,11 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/intersection/" element={<Intersection />} />
-      <Route path="/app/console/" element={<Console />} />
       <Route path="/auth/signup/" element={<SignUp />} />
       <Route path="/auth/signin/" element={<SignIn />} />
       <Route path="/auth/accounts/" element={<Accounts />} />
+      <Route path="/app/organizer_console/" element={<OrganizerConsole />} />
+      <Route path="/app/voter_console/" element={<VoterConsole />} />
     </Routes>
   );
 };

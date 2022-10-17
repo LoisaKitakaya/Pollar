@@ -60,7 +60,7 @@ const Intersection = () => {
           <div className="w-1-4 h-1-4 m-2 rounded-md drop-shadow-lg hover:drop-shadow-xl border border-gray-400 hover:border-gray-900 bg-zinc-200 hover:bg-zinc-400">
             <Tooltip label="I have a voter account" color="teal" withArrow>
               <a
-                href="/"
+                href="/app/voter_console/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
@@ -88,7 +88,7 @@ const Intersection = () => {
           <div className="w-1-4 h-1-4 m-2 rounded-md drop-shadow-lg hover:drop-shadow-xl border border-gray-400 hover:border-gray-900 bg-zinc-200 hover:bg-zinc-400">
             <Tooltip label="I have an organizer account" color="teal" withArrow>
               <a
-                href="/"
+                href="/app/organizer_console/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
