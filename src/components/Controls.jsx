@@ -23,6 +23,7 @@ const Controls = ({ opened, setOpened }) => {
         </h1>
       </a>
       <div className="flex items-center">
+        <Avatar color="blue" radius="xl" className="cursor-pointer mx-4" />
         <Menu
           shadow="md"
           width={200}
@@ -79,7 +80,6 @@ const Controls = ({ opened, setOpened }) => {
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
-        <Avatar color="blue" radius="xl" className="cursor-pointer mx-4" />
         <Burger
           opened={opened}
           onClick={() => setOpened((o) => !o)}
