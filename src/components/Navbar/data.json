@@ -39,19 +39,23 @@
   "resources": [
     {
       "icon": "https://img.icons8.com/office/80/000000/blog.png",
-      "title": "Blog"
+      "title": "Blog",
+      "path": "/resources/blog/"
     },
     {
       "icon": "https://img.icons8.com/office/80/000000/lifebuoy.png",
-      "title": "Help center"
+      "title": "Help center",
+      "path": "/resources/help_center/"
     },
     {
       "icon": "https://img.icons8.com/office/80/000000/user-manual.png",
-      "title": "Use cases"
+      "title": "Use cases",
+      "path": "/resources/use_cases/"
     },
     {
       "icon": "https://img.icons8.com/office/80/000000/good-quality--v1.png",
-      "title": "Success stories"
+      "title": "Success stories",
+      "path": "/resources/success_stories/"
     }
   ]
 }

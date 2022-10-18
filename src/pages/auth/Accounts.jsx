@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import {
   IconDeviceMobileMessage,
@@ -23,9 +22,6 @@ const GET_WORKSPACES = gql`
 const Accounts = () => {
   PageTitle("Accounts");
 
-  const [features, setFeaturesState] = useState(false);
-  const [resources, setResourcesState] = useState(false);
-
   const { loading, error, data } = useQuery(GET_WORKSPACES);
 
   let workspaceData = [];
@@ -44,12 +40,7 @@ const Accounts = () => {
   return (
     <div>
       {/* navigation */}
-      <Navbar
-        featureState={features}
-        setFeatureState={setFeaturesState}
-        resourcesState={resources}
-        setResourcesState={setResourcesState}
-      />
+      <Navbar />
       {/* navigation */}
 
       {/* body */}

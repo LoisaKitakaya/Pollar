@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Footer from "../../components/Footer";
 import HowPollarWorks from "../../components/Home/HowPollarWorks";
 import Intro from "../../components/Home/Intro";
@@ -11,19 +9,11 @@ import PageTitle from "../../pageTitle";
 
 const Home = () => {
   PageTitle("Home");
-  
-  const [features, setFeaturesState] = useState(false);
-  const [resources, setResourcesState] = useState(false);
 
   return (
     <div>
       {/* navigation */}
-      <Navbar
-        featureState={features}
-        setFeatureState={setFeaturesState}
-        resourcesState={resources}
-        setResourcesState={setResourcesState}
-      />
+      <Navbar />
       {/* navigation */}
 
       {/* body */}

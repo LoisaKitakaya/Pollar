@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Tooltip } from "@mantine/core";
 
 import Footer from "../../components/Footer";
@@ -8,18 +7,10 @@ import PageTitle from "../../pageTitle";
 const Intersection = () => {
   PageTitle("Intersection");
 
-  const [features, setFeaturesState] = useState(false);
-  const [resources, setResourcesState] = useState(false);
-
   return (
     <div>
       {/* navigation */}
-      <Navbar
-        featureState={features}
-        setFeatureState={setFeaturesState}
-        resourcesState={resources}
-        setResourcesState={setResourcesState}
-      />
+      <Navbar />
       {/* navigation */}
 
       {/* body */}

@@ -1,5 +1,4 @@
 import { gql, useMutation } from "@apollo/client";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Footer from "../../components/Footer";
@@ -40,9 +39,6 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const [features, setFeaturesState] = useState(false);
-  const [resources, setResourcesState] = useState(false);
-
   const [registerUser, { data, loading, error }] = useMutation(
     REGISTER_USER_ACCOUNT
   );
@@ -58,12 +54,7 @@ const SignUp = () => {
   return (
     <div>
       {/* navigation */}
-      <Navbar
-        featureState={features}
-        setFeatureState={setFeaturesState}
-        resourcesState={resources}
-        setResourcesState={setResourcesState}
-      />
+      <Navbar />
       {/* navigation */}
 
       {/* body */}
