@@ -1,22 +1,12 @@
-import {
-  ThemeIcon,
-  Tooltip,
-  Modal,
-  useMantineTheme,
-  Badge,
-} from "@mantine/core";
-import { Carousel } from "@mantine/carousel";
-import {
-  IconRowInsertTop,
-  IconEye,
-  IconEdit,
-  IconTrash,
-  IconLockAccess,
-} from "@tabler/icons";
+import { ThemeIcon, Tooltip } from "@mantine/core";
+import { IconEye, IconEdit, IconTrash, IconLockAccess } from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
+import { useState } from "react";
 
 import Controls from "../Controls";
-import { useState } from "react";
+import ViewPoll from "./Poll-modals/ViewPoll";
+import CreatePoll from "./Poll-modals/CreatePoll";
+import EditPoll from "./Poll-modals/EditPoll";
 
 const GET_MYPOLLS = gql`
   query GetMyPolls {
@@ -39,8 +29,6 @@ const GET_MYPOLLS = gql`
 `;
 
 const OrganizerPolls = ({ opened, setOpened }) => {
-  const theme = useMantineTheme();
-
   const [openedView, setOpenedView] = useState(false);
   const [openedCreate, setOpenedCreate] = useState(false);
   const [openedEdit, setOpenedEdit] = useState(false);
@@ -163,164 +151,67 @@ const OrganizerPolls = ({ opened, setOpened }) => {
         )}
 
         {/* view poll modal */}
-        <Modal
-          overlayColor={
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[9]
-              : theme.colors.gray[2]
-          }
-          overlayOpacity={0.55}
-          overlayBlur={3}
-          opened={openedView}
-          onClose={() => setOpenedView(false)}
-          withCloseButton={false}
-          size="70%"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-3xl font-light pl-1">Poll details</p>
-            {pollData.open ? (
-              <Badge color="teal" size="lg" variant="filled">
-                Status: Open{" "}
-                <span className="font-light text-md">
-                  {"(elections can be held on this poll)"}
-                </span>
-              </Badge>
-            ) : (
-              <Badge color="yellow" size="lg" variant="filled">
-                Status: Closed{" "}
-                <span className="font-light text-md">
-                  {"(elections cannot be held on this poll)"}
-                </span>
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center justify-between mb-4">
-            <div className="rounded-lg border py-2 px-4">
-              <p className="font-light text-lg text-gray-600 mb-2">
-                Contended position
-              </p>
-              <p className="text-2xl font-semibold text-gray-900">
-                {pollData.seat}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <div className="rounded-lg border py-2 px-4 mx-2">
-                <p className="font-light text-lg text-gray-600 mb-2">
-                  Begins on
-                </p>
-                <p className="text-2xl font-semibold text-gray-900">
-                  {pollData.beginDate}
-                </p>
-              </div>
-              <div className="rounded-lg border py-2 px-4 mx-2">
-                <p className="font-light text-lg text-gray-600 mb-2">Ends on</p>
-                <p className="text-2xl font-semibold text-gray-900">
-                  {pollData.endDate}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="rounded-lg border py-2 px-4 mb-4">
-            <p className="font-light text-lg text-gray-600 mb-2">Short intro about this election</p>
-            <p className="font-semibold text-gray-900">{pollData.intro}</p>
-          </div>
-          <hr className="mb-4" />
-          <div className="rounded-lg border py-2 px-4 mb-4">
-            <p className="font-light text-lg text-gray-600 mb-2">
-              Contending candidates
-            </p>
-            <Carousel
-              align="start"
-              slideSize="100%"
-              height={475}
-              slideGap="xl"
-              loop
-            >
-              <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-                <img
-                  className="w-full h-full rounded-t-lg"
-                  src="https://images.pexels.com/photos/13816113/pexels-photo-13816113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt=""
-                />
-                <div className="m-1 py-1 px-2">
-                  <p>Name: Some Name</p>
-                </div>
-              </div>
-              <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-                <img
-                  className="w-full h-full rounded-t-lg"
-                  src="https://images.pexels.com/photos/13866617/pexels-photo-13866617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt=""
-                />
-                <div className="m-1 py-1 px-2">
-                  <p>Name: Some Name</p>
-                </div>
-              </div>
-              <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-                <img
-                  className="w-full h-full rounded-t-lg"
-                  src="https://images.pexels.com/photos/13719224/pexels-photo-13719224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt=""
-                />
-                <div className="m-1 py-1 px-2">
-                  <p>Name: Some Name</p>
-                </div>
-              </div>
-            </Carousel>
-          </div>
-        </Modal>
+        <ViewPoll
+          openedView={openedView}
+          setOpenedView={setOpenedView}
+          pollData={pollData}
+        />
         {/* view poll modal */}
 
         {/* create poll modal */}
-        <Modal
-          overlayColor={
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[9]
-              : theme.colors.gray[2]
-          }
-          overlayOpacity={0.55}
-          overlayBlur={3}
-          opened={openedCreate}
-          onClose={() => setOpenedCreate(false)}
-          withCloseButton={false}
-          size="xl"
-        >
-          <p className="text-lg text-center">Create poll modal</p>
-        </Modal>
+        <CreatePoll
+          openedCreate={openedCreate}
+          setOpenedCreate={setOpenedCreate}
+        />
         {/* create poll modal */}
 
         {/* edit poll modal */}
-        <Modal
-          overlayColor={
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[9]
-              : theme.colors.gray[2]
-          }
-          overlayOpacity={0.55}
-          overlayBlur={3}
-          opened={openedEdit}
-          onClose={() => setOpenedEdit(false)}
-          withCloseButton={false}
-          size="xl"
-        >
-          <p className="text-lg text-center">Edit poll modal</p>
-        </Modal>
+        <EditPoll openedEdit={openedEdit} setOpenedEdit={setOpenedEdit} />
         {/* edit poll modal */}
 
         {/* create poll button */}
         <Tooltip label="create poll" color="dark" position="left" withArrow>
-          <ThemeIcon
-            variant="light"
-            color="dark"
-            radius="md"
-            size="xl"
-            className="fixed bottom-10 right-16 shadow-lg cursor-pointer"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-10 h-10 fixed bottom-24 rounded-md bg-zinc-300 right-16 shadow-lg cursor-pointer p-2"
             onClick={() => setOpenedCreate(true)}
           >
-            <IconRowInsertTop size={"xl"} />
-          </ThemeIcon>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
         </Tooltip>
         {/* create poll button */}
+
+        {/* register candidate button */}
+        <Tooltip
+          label="register candidate"
+          color="dark"
+          position="left"
+          withArrow
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-10 h-10 fixed bottom-10 rounded-md bg-zinc-300 right-16 shadow-lg cursor-pointer p-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+            />
+          </svg>
+        </Tooltip>
+        {/* register candidate button */}
       </div>
       {/* body */}
     </div>
