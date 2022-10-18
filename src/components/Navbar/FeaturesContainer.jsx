@@ -10,7 +10,6 @@ const FeaturesContainer = () => {
       <Accordion
         className="global-font"
         radius="xs"
-        defaultValue="customization"
       >
         {features.map((feature, index) => {
           const list = (
