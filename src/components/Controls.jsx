@@ -1,4 +1,4 @@
-import { Burger, Menu, Text, Avatar } from "@mantine/core";
+import { Burger, Menu, Text, Avatar, Kbd } from "@mantine/core";
 import {
   IconSettings,
   IconSearch,
@@ -11,7 +11,7 @@ const Controls = ({ opened, setOpened }) => {
   const title = opened ? "Close navigation" : "Open navigation";
 
   return (
-    <div className="flex items-center justify-between py-2 px-16 bg-slate-100 shadow-lg sticky top-0 w-full">
+    <div className="flex items-center justify-between py-1 px-16 bg-slate-100 shadow-lg sticky top-0 w-full">
       <a href="/" className="flex items-center">
         <img
           className="w-14"
@@ -66,7 +66,7 @@ const Controls = ({ opened, setOpened }) => {
               icon={<IconSearch size={14} />}
               rightSection={
                 <Text size="xs" color="dimmed">
-                  Ctrl + K
+                  <Kbd>Ctrl</Kbd> + <Kbd>K</Kbd>
                 </Text>
               }
             >
