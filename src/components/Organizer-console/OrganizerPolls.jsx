@@ -7,6 +7,7 @@ import Controls from "../Controls";
 import ViewPoll from "./Poll-modals/ViewPoll";
 import CreatePoll from "./Poll-modals/CreatePoll";
 import EditPoll from "./Poll-modals/EditPoll";
+import RegisterCandidate from "./Candidate-modals/RegisterCandidate";
 
 const GET_MYPOLLS = gql`
   query GetMyPolls {
@@ -32,6 +33,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
   const [openedView, setOpenedView] = useState(false);
   const [openedCreate, setOpenedCreate] = useState(false);
   const [openedEdit, setOpenedEdit] = useState(false);
+  const [registerCandidate, setRegisterCandidate] = useState(false);
 
   const [pollData, setPollData] = useState({});
 
@@ -169,6 +171,13 @@ const OrganizerPolls = ({ opened, setOpened }) => {
         <EditPoll openedEdit={openedEdit} setOpenedEdit={setOpenedEdit} />
         {/* edit poll modal */}
 
+        {/* register candidate modal */}
+        <RegisterCandidate
+          registerCandidate={registerCandidate}
+          setRegisterCandidate={setRegisterCandidate}
+        />
+        {/* register candidate modal */}
+
         {/* create poll button */}
         <Tooltip label="create poll" color="dark" position="left" withArrow>
           <svg
@@ -203,6 +212,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-10 h-10 fixed bottom-10 rounded-md bg-zinc-300 right-16 shadow-lg cursor-pointer p-2"
+            onClick={() => setRegisterCandidate(true)}
           >
             <path
               strokeLinecap="round"
