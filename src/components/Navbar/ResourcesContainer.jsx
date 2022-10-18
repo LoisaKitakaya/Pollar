@@ -11,7 +11,7 @@ const ResourcesContainer = () => {
         const list = (
           <>
             <a
-              href="/"
+              href={`${resource.path}`}
               className="flex items-center p-4 hover:text-blue-900 hover:bg-zinc-100"
               key={index}
             >

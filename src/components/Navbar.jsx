@@ -1,16 +1,11 @@
-import { Popover } from "@mantine/core";
+import { HoverCard } from "@mantine/core";
 import { useEffect, useState } from "react";
 import LogOut from "./Accounts/LogOut";
 
 import FeaturesContainer from "./Navbar/FeaturesContainer";
 import ResourcesContainer from "./Navbar/ResourcesContainer";
 
-const Navbar = ({
-  featureState,
-  setFeatureState,
-  resourcesState,
-  setResourcesState,
-}) => {
+const Navbar = () => {
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
@@ -33,19 +28,9 @@ const Navbar = ({
       </a>
 
       <div className="flex items-center">
-        <Popover
-          width={375}
-          position="bottom"
-          withArrow
-          shadow="md"
-          opened={featureState}
-          onChange={setFeatureState}
-        >
-          <Popover.Target>
-            <p
-              className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900"
-              onClick={() => setFeatureState((o) => !o)}
-            >
+        <HoverCard width={500} position="bottom" withArrow shadow="md">
+          <HoverCard.Target>
+            <p className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900">
               <span className="flex items-center">
                 Features{" "}
                 <svg
@@ -64,14 +49,14 @@ const Navbar = ({
                 </svg>
               </span>
             </p>
-          </Popover.Target>
+          </HoverCard.Target>
 
-          <Popover.Dropdown>
+          <HoverCard.Dropdown>
             {/* features container */}
             <FeaturesContainer />
             {/* features container */}
-          </Popover.Dropdown>
-        </Popover>
+          </HoverCard.Dropdown>
+        </HoverCard>
         {/* <a href="/" className="text-xl pt-1 mx-4">
           Features
         </a> */}
@@ -81,19 +66,9 @@ const Navbar = ({
         <a href="/" className="text-lg mx-4 hover:text-blue-900">
           What's New
         </a>
-        <Popover
-          width={250}
-          position="bottom"
-          withArrow
-          shadow="md"
-          opened={resourcesState}
-          onChange={setResourcesState}
-        >
-          <Popover.Target>
-            <p
-              className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900"
-              onClick={() => setResourcesState((o) => !o)}
-            >
+        <HoverCard width={250} position="bottom" withArrow shadow="md">
+          <HoverCard.Target>
+            <p className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900">
               <span className="flex items-center">
                 Resources{" "}
                 <svg
@@ -112,14 +87,14 @@ const Navbar = ({
                 </svg>
               </span>
             </p>
-          </Popover.Target>
+          </HoverCard.Target>
 
-          <Popover.Dropdown>
+          <HoverCard.Dropdown>
             {/* resource container */}
             <ResourcesContainer />
             {/* resource container */}
-          </Popover.Dropdown>
-        </Popover>
+          </HoverCard.Dropdown>
+        </HoverCard>
         {/* <a href="/" className="text-xl pt-1 mx-4">
           Resources
         </a> */}
