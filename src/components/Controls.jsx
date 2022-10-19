@@ -1,4 +1,4 @@
-import { Burger, Menu, Text, Avatar, Kbd } from "@mantine/core";
+import { Burger, Menu, Text, Kbd } from "@mantine/core";
 import {
   IconSettings,
   IconSearch,
@@ -6,8 +6,9 @@ import {
   IconMessageCircle,
   IconTrash,
 } from "@tabler/icons";
+import OrganizerAvatar from "./Controls/OrganizerAvatar";
 
-const Controls = ({ opened, setOpened, myIcon }) => {
+const Controls = ({ opened, setOpened }) => {
   const title = opened ? "Close navigation" : "Open navigation";
 
   return (
@@ -23,17 +24,7 @@ const Controls = ({ opened, setOpened, myIcon }) => {
         </h1>
       </a>
       <div className="flex items-center">
-        {myIcon ? (
-          <Avatar
-            src={myIcon.image}
-            alt={myIcon.user.firstName}
-            color="blue"
-            radius="xl"
-            className="cursor-pointer mx-4"
-          />
-        ) : (
-          <Avatar color="blue" radius="xl" className="cursor-pointer mx-4" />
-        )}
+        <OrganizerAvatar />
         <Menu
           shadow="md"
           width={200}
