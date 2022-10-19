@@ -7,7 +7,7 @@ import {
   IconTrash,
 } from "@tabler/icons";
 
-const Controls = ({ opened, setOpened }) => {
+const Controls = ({ opened, setOpened, myIcon }) => {
   const title = opened ? "Close navigation" : "Open navigation";
 
   return (
@@ -23,7 +23,17 @@ const Controls = ({ opened, setOpened }) => {
         </h1>
       </a>
       <div className="flex items-center">
-        <Avatar color="blue" radius="xl" className="cursor-pointer mx-4" />
+        {myIcon ? (
+          <Avatar
+            src={myIcon.image}
+            alt={myIcon.user.firstName}
+            color="blue"
+            radius="xl"
+            className="cursor-pointer mx-4"
+          />
+        ) : (
+          <Avatar color="blue" radius="xl" className="cursor-pointer mx-4" />
+        )}
         <Menu
           shadow="md"
           width={200}

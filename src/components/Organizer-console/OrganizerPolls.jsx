@@ -3,7 +3,6 @@ import { IconEye, IconEdit, IconTrash, IconLockAccess } from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 
-import Controls from "../Controls";
 import ViewPoll from "./Poll-modals/ViewPoll";
 import CreatePoll from "./Poll-modals/CreatePoll";
 import EditPoll from "./Poll-modals/EditPoll";
@@ -48,13 +47,19 @@ const OrganizerPolls = ({ opened, setOpened }) => {
 
   return (
     <div>
-      {/* controls */}
-      <Controls opened={opened} setOpened={setOpened} />
-      {/* controls */}
-
       {/* body */}
       <div className="h-full py-4 px-20">
-        {data ? (
+        {data.allPolls.length === 0 ? (
+          <div className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg">
+            <h1 className="text-4xl text-center mb-6">
+              You have not created any polls yet.
+            </h1>
+            <p className="text-lg text-center text-zinc-400">
+              click on the create button at the bottom right end of your console
+              to create a poll.
+            </p>
+          </div>
+        ) : (
           <div>
             {data.allPolls.map((poll, index) => {
               const list = (
@@ -139,16 +144,6 @@ const OrganizerPolls = ({ opened, setOpened }) => {
 
               return list;
             })}
-          </div>
-        ) : (
-          <div className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg">
-            <h1 className="text-4xl text-center mb-6">
-              You have not created any polls yet.
-            </h1>
-            <p className="text-lg text-center text-zinc-400">
-              click on the create button at the bottom right end of your console
-              to create a poll.
-            </p>
           </div>
         )}
 

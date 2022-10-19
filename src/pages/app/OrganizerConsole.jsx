@@ -6,21 +6,52 @@ import {
   IconPackage,
 } from "@tabler/icons";
 import { useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+
+import Controls from "../../components/Controls";
 import OrganizerCandidates from "../../components/Organizer-console/OrganizerCandidates";
 import OrganizerPolls from "../../components/Organizer-console/OrganizerPolls";
 import OrganizerProfile from "../../components/Organizer-console/OrganizerProfile";
 import OrganizerRules from "../../components/Organizer-console/OrganizerRules";
 import PageTitle from "../../pageTitle";
 
+const CHECK_MY_ACCOUNT = gql`
+  query organizerCheck {
+    myOrganizerAccount {
+      user {
+        firstName
+      }
+      image
+    }
+  }
+`;
+
 const OrganizerConsole = () => {
   PageTitle("Organizer console");
 
   const [opened, setOpened] = useState(false);
 
+  const { loading, error, data } = useQuery(CHECK_MY_ACCOUNT);
+
   const theme = useMantineTheme();
+
+  if (data) {
+    console.log(data);
+    console.log("Data fetched successfully.");
+  }
+  if (loading) return "Fetching...";
+  if (error) return `Fetching error! ${error.message}`;
 
   return (
     <div>
+      {/* controls */}
+      <Controls
+        opened={opened}
+        setOpened={setOpened}
+        myIcon={data.myOrganizerAccount}
+      />
+      {/* controls */}
+
       <Tabs
         color="teal"
         variant="pills"

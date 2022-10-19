@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 
 const REGISTER_ORGANIZER = gql`
   mutation RegisterOrganizer(
@@ -30,9 +31,13 @@ const RegisterOrganizer = () => {
   const [registerOrganizer, { data, loading, error }] =
     useMutation(REGISTER_ORGANIZER);
 
+  const navigate = useNavigate();
+
   if (data) {
     console.log(data);
     console.log("Account registration success. Redirecting to console.");
+
+    navigate("/app/organizer_console/")
   }
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;

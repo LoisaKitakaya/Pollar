@@ -2,17 +2,11 @@ import { Accordion } from "@mantine/core";
 
 import data from "../Organizer-console/data.json";
 
-import Controls from "../Controls";
-
 const rules = data.rules;
 
 const OrganizerRules = ({ opened, setOpened }) => {
   return (
     <div>
-      {/* controls */}
-      <Controls opened={opened} setOpened={setOpened} />
-      {/* controls */}
-
       {/* body */}
       <div className="h-full py-4 px-20">
         <div className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg">
@@ -24,7 +18,9 @@ const OrganizerRules = ({ opened, setOpened }) => {
               const list = (
                 <>
                   <Accordion.Item value={`${rule.value}`} key={index}>
-                    <Accordion.Control className="bg-gray-200 hover:bg-gray-300">{rule.title}</Accordion.Control>
+                    <Accordion.Control className="bg-gray-200 hover:bg-gray-300">
+                      {rule.title}
+                    </Accordion.Control>
                     <Accordion.Panel>{rule.description}</Accordion.Panel>
                   </Accordion.Item>
                 </>
