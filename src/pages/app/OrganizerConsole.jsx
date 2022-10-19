@@ -20,8 +20,10 @@ const CHECK_MY_ACCOUNT = gql`
     myOrganizerAccount {
       user {
         firstName
+        lastName
+        email
+        isActive
       }
-      image
     }
   }
 `;
@@ -45,11 +47,7 @@ const OrganizerConsole = () => {
   return (
     <div>
       {/* controls */}
-      <Controls
-        opened={opened}
-        setOpened={setOpened}
-        myIcon={data.myOrganizerAccount}
-      />
+      <Controls opened={opened} setOpened={setOpened} />
       {/* controls */}
 
       <Tabs
