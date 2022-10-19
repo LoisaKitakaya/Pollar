@@ -1,12 +1,6 @@
-import Controls from "../Controls";
-
 const OrganizerCandidates = ({ opened, setOpened }) => {
   return (
     <div>
-      {/* controls */}
-      <Controls opened={opened} setOpened={setOpened} />
-      {/* controls */}
-
       {/* body */}
       <div className="h-full py-4 px-20">
         <h1 className="text-4xl text-center">Candidates</h1>
