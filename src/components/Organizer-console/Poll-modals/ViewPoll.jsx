@@ -86,7 +86,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
                 alt=""
               />
               <div className="m-1 py-1 px-2">
-                <p>Name: Some Name</p>
+                <p>Some Name</p>
               </div>
             </div>
             <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
@@ -96,7 +96,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
                 alt=""
               />
               <div className="m-1 py-1 px-2">
-                <p>Name: Some Name</p>
+                <p>Some Name</p>
               </div>
             </div>
             <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
@@ -106,7 +106,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
                 alt=""
               />
               <div className="m-1 py-1 px-2">
-                <p>Name: Some Name</p>
+                <p>Some Name</p>
               </div>
             </div>
           </Carousel>

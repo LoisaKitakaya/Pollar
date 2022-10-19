@@ -10,7 +10,7 @@ import RegisterCandidate from "./Candidate-modals/RegisterCandidate";
 
 const GET_MYPOLLS = gql`
   query GetMyPolls {
-    allPolls {
+    organizerPolls {
       id
       seat
       intro
@@ -49,7 +49,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
     <div>
       {/* body */}
       <div className="h-full py-4 px-20">
-        {data.allPolls.length === 0 ? (
+        {data.organizerPolls.length === 0 ? (
           <div className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg">
             <h1 className="text-4xl text-center mb-6">
               You have not created any polls yet.
@@ -61,7 +61,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
           </div>
         ) : (
           <div>
-            {data.allPolls.map((poll, index) => {
+            {data.organizerPolls.map((poll, index) => {
               const list = (
                 <>
                   <div
@@ -97,7 +97,11 @@ const OrganizerPolls = ({ opened, setOpened }) => {
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
-                          onClick={() => setOpenedEdit(true)}
+                          onClick={() => {
+                            setPollData(poll);
+
+                            setOpenedEdit(true);
+                          }}
                         >
                           <IconEdit />
                         </ThemeIcon>
@@ -163,7 +167,11 @@ const OrganizerPolls = ({ opened, setOpened }) => {
         {/* create poll modal */}
 
         {/* edit poll modal */}
-        <EditPoll openedEdit={openedEdit} setOpenedEdit={setOpenedEdit} />
+        <EditPoll
+          openedEdit={openedEdit}
+          setOpenedEdit={setOpenedEdit}
+          pollData={pollData}
+        />
         {/* edit poll modal */}
 
         {/* register candidate modal */}
