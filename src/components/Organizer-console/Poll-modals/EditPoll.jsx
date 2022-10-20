@@ -66,7 +66,7 @@ const EditPoll = ({ openedEdit, setOpenedEdit, pollData }) => {
         opened={openedEdit}
         onClose={() => setOpenedEdit(false)}
         withCloseButton={false}
-        size="xl"
+        size="lg"
       >
         <p className="text-lg text-center">Update poll</p>
         <form

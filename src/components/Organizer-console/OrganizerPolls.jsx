@@ -32,9 +32,10 @@ const OrganizerPolls = ({ opened, setOpened }) => {
   const [openedView, setOpenedView] = useState(false);
   const [openedCreate, setOpenedCreate] = useState(false);
   const [openedEdit, setOpenedEdit] = useState(false);
-  const [registerCandidate, setRegisterCandidate] = useState(false);
+  const [registerCandidateView, setRegisterCandidateView] = useState(false);
 
   const [pollData, setPollData] = useState({});
+  const [allPolls, setAllPolls] = useState([]);
 
   const { loading, error, data } = useQuery(GET_MYPOLLS);
 
@@ -44,6 +45,8 @@ const OrganizerPolls = ({ opened, setOpened }) => {
   }
   if (loading) return "Fetching...";
   if (error) return `Fetching error! ${error.message}`;
+
+  const PopulateAllPolls = () => setAllPolls(data.organizerPolls);
 
   return (
     <div>
@@ -176,8 +179,9 @@ const OrganizerPolls = ({ opened, setOpened }) => {
 
         {/* register candidate modal */}
         <RegisterCandidate
-          registerCandidate={registerCandidate}
-          setRegisterCandidate={setRegisterCandidate}
+          registerCandidateView={registerCandidateView}
+          setRegisterCandidateView={setRegisterCandidateView}
+          allPolls={allPolls}
         />
         {/* register candidate modal */}
 
@@ -215,7 +219,11 @@ const OrganizerPolls = ({ opened, setOpened }) => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-10 h-10 fixed bottom-10 rounded-md bg-zinc-300 right-16 shadow-lg cursor-pointer p-2"
-            onClick={() => setRegisterCandidate(true)}
+            onClick={() => {
+              setRegisterCandidateView(true);
+
+              PopulateAllPolls();
+            }}
           >
             <path
               strokeLinecap="round"
