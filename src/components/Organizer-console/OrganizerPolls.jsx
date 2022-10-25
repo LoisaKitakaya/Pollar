@@ -1,5 +1,5 @@
 import { ThemeIcon, Tooltip } from "@mantine/core";
-import { IconEye, IconEdit, IconTrash, IconLockAccess } from "@tabler/icons";
+import { IconEye, IconEdit } from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 
@@ -7,6 +7,8 @@ import ViewPoll from "./Poll-modals/ViewPoll";
 import CreatePoll from "./Poll-modals/CreatePoll";
 import EditPoll from "./Poll-modals/EditPoll";
 import RegisterCandidate from "./Candidate-modals/RegisterCandidate";
+import ClosePoll from "./Poll-modals/ClosePoll";
+import DeletePoll from "./Poll-modals/DeletePoll";
 
 const GET_MYPOLLS = gql`
   query GetMyPolls {
@@ -109,32 +111,8 @@ const OrganizerPolls = ({ opened, setOpened }) => {
                           <IconEdit />
                         </ThemeIcon>
                       </Tooltip>
-                      {poll.open ? (
-                        <Tooltip label="close poll" color="dark" withArrow>
-                          <ThemeIcon
-                            variant="outline"
-                            color="orange"
-                            radius="md"
-                            size="lg"
-                            className="cursor-pointer mx-1"
-                          >
-                            <IconLockAccess />
-                          </ThemeIcon>
-                        </Tooltip>
-                      ) : (
-                        <div></div>
-                      )}
-                      <Tooltip label="delete poll" color="dark" withArrow>
-                        <ThemeIcon
-                          variant="outline"
-                          color="red"
-                          radius="md"
-                          size="lg"
-                          className="cursor-pointer mx-1"
-                        >
-                          <IconTrash />
-                        </ThemeIcon>
-                      </Tooltip>
+                      {poll.open ? <ClosePoll PollID={poll.id} /> : <div></div>}
+                      <DeletePoll PollID={poll.id} />
                       {poll.open ? (
                         <span className="mx-1 py-1 px-2 bg-emerald-300 rounded-md">
                           Status: Open
