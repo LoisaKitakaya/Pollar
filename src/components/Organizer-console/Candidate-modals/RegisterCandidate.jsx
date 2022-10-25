@@ -3,7 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 
 const REGISTER_CANDIDATE = gql`
   mutation AddCandidate(
-    $id: Int!
+    $id: String!
     $firstName: String!
     $lastName: String!
     $email: String!
