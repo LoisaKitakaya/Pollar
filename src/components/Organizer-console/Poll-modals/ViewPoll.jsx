@@ -4,6 +4,8 @@ import { Modal, Badge, useMantineTheme } from "@mantine/core";
 const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
   const theme = useMantineTheme();
 
+  let candidates = pollData.candidateSet;
+
   return (
     <div>
       <Modal
@@ -72,44 +74,48 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
           <p className="font-light text-lg text-gray-600 mb-2">
             Contending candidates
           </p>
-          <Carousel
-            align="start"
-            slideSize="100%"
-            height={475}
-            slideGap="xl"
-            loop
-          >
-            <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-              <img
-                className="w-full h-full rounded-t-lg"
-                src="https://images.pexels.com/photos/13816113/pexels-photo-13816113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-              />
-              <div className="m-1 py-1 px-2">
-                <p>Some Name</p>
-              </div>
+          {typeof candidates != "undefined" &&
+          candidates != null &&
+          candidates.length != null &&
+          candidates.length > 0 ? (
+            <Carousel
+              align="start"
+              slideSize="100%"
+              height={375}
+              slideGap="xl"
+              loop
+            >
+              {candidates.map((candidate, index) => {
+                const list = (
+                  <>
+                    <div
+                      className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer"
+                      key={index}
+                    >
+                      <img
+                        className="w-full h-full rounded-t-lg"
+                        src="https://images.pexels.com/photos/13816113/pexels-photo-13816113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt=""
+                      />
+                      <div className="m-1 py-1 px-2">
+                        <p>
+                          {candidate.firstName} {candidate.lastName}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
+
+                return list;
+              })}
+            </Carousel>
+          ) : (
+            <div>
+              <p className="text-xl">
+                No candidates have been registered to this poll yet.
+              </p>
             </div>
-            <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-              <img
-                className="w-full h-full rounded-t-lg"
-                src="https://images.pexels.com/photos/13866617/pexels-photo-13866617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-              />
-              <div className="m-1 py-1 px-2">
-                <p>Some Name</p>
-              </div>
-            </div>
-            <div className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer">
-              <img
-                className="w-full h-full rounded-t-lg"
-                src="https://images.pexels.com/photos/13719224/pexels-photo-13719224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-              />
-              <div className="m-1 py-1 px-2">
-                <p>Some Name</p>
-              </div>
-            </div>
-          </Carousel>
+          )}
         </div>
       </Modal>
     </div>
