@@ -1,5 +1,6 @@
 import { Carousel } from "@mantine/carousel";
 import { Modal, Badge, useMantineTheme } from "@mantine/core";
+import CandidateAvatar from "../Candidate-modals/CandidateAvatar";
 
 const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
   const theme = useMantineTheme();
@@ -92,11 +93,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
                       className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer"
                       key={index}
                     >
-                      <img
-                        className="w-full h-full rounded-t-lg"
-                        src="https://images.pexels.com/photos/13816113/pexels-photo-13816113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                      />
+                      <CandidateAvatar CandidateID={candidate.id} />
                       <div className="m-1 py-1 px-2">
                         <p>
                           {candidate.firstName} {candidate.lastName}
