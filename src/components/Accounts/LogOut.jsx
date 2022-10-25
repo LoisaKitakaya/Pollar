@@ -9,6 +9,8 @@ const LogOut = () => {
     localStorage.removeItem("authenticated");
 
     navigate("/");
+
+    window.location.reload(false);
   };
 
   return (

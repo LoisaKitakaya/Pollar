@@ -21,7 +21,7 @@ const CandidateAvatar = ({ CandidateID }) => {
   return (
     <div>
       <img
-        className="w-full h-full rounded-t-lg"
+        className="w-full h-60 rounded-t-lg"
         src={data.candidateAvatar}
         alt="candidate avatar"
       />

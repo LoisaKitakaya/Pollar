@@ -57,9 +57,6 @@ const Navbar = () => {
             {/* features container */}
           </HoverCard.Dropdown>
         </HoverCard>
-        {/* <a href="/" className="text-xl pt-1 mx-4">
-          Features
-        </a> */}
         <a href="/" className="text-lg mx-4 hover:text-blue-900">
           Pricing
         </a>
@@ -95,9 +92,6 @@ const Navbar = () => {
             {/* resource container */}
           </HoverCard.Dropdown>
         </HoverCard>
-        {/* <a href="/" className="text-xl pt-1 mx-4">
-          Resources
-        </a> */}
       </div>
 
       <div className="flex items-center">

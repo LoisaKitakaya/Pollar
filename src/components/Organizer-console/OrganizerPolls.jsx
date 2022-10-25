@@ -10,7 +10,7 @@ import RegisterCandidate from "./Candidate-modals/RegisterCandidate";
 import ClosePoll from "./Poll-modals/ClosePoll";
 import DeletePoll from "./Poll-modals/DeletePoll";
 
-const GET_MYPOLLS = gql`
+const GET_MY_POLLS = gql`
   query GetMyPolls {
     organizerPolls {
       id
@@ -39,7 +39,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
   const [pollData, setPollData] = useState({});
   const [allPolls, setAllPolls] = useState([]);
 
-  const { loading, error, data } = useQuery(GET_MYPOLLS);
+  const { loading, error, data } = useQuery(GET_MY_POLLS);
 
   if (data) {
     console.log(data);
