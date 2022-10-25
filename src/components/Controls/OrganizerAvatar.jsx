@@ -24,7 +24,7 @@ const OrganizerAvatar = () => {
         alt="avatar"
         color="blue"
         radius="xl"
-        className="cursor-pointer mx-4"
+        className="cursor-pointer mx-4 shadow-md"
       />
     </div>
   );

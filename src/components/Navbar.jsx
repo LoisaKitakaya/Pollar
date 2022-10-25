@@ -1,7 +1,7 @@
 import { HoverCard } from "@mantine/core";
 import { useEffect, useState } from "react";
-import LogOut from "./Accounts/LogOut";
 
+import LogOut from "./Accounts/LogOut";
 import FeaturesContainer from "./Navbar/FeaturesContainer";
 import ResourcesContainer from "./Navbar/ResourcesContainer";
 

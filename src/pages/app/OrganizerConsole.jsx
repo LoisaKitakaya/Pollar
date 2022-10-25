@@ -54,7 +54,7 @@ const OrganizerConsole = () => {
         color="teal"
         variant="pills"
         orientation="vertical"
-        defaultValue="rules"
+        defaultValue="polls"
         className="h-screen"
       >
         <Drawer
@@ -73,13 +73,6 @@ const OrganizerConsole = () => {
         >
           {/* Drawer content */}
           <Tabs.List>
-            <Tabs.Tab
-              value="rules"
-              icon={<IconLicense size={15} />}
-              onClick={() => setOpened(false)}
-            >
-              Rules
-            </Tabs.Tab>
             <Tabs.Tab
               value="polls"
               icon={<IconPackage size={15} />}
@@ -100,6 +93,13 @@ const OrganizerConsole = () => {
               onClick={() => setOpened(false)}
             >
               Profile
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="rules"
+              icon={<IconLicense size={15} />}
+              onClick={() => setOpened(false)}
+            >
+              Rules
             </Tabs.Tab>
           </Tabs.List>
         </Drawer>
