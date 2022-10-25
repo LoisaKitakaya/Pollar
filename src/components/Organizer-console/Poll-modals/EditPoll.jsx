@@ -3,7 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 
 const UPDATE_POLL = gql`
   mutation UpdatePoll(
-    $id: Int!
+    $id: String!
     $seat: String!
     $intro: String!
     $beginDate: Date!
