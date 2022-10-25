@@ -68,7 +68,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
           <p className="font-light text-lg text-gray-600 mb-2">
             Short intro about this election
           </p>
-          <p className="font-semibold text-gray-900">{pollData.intro}</p>
+          <p className="text-gray-900">{pollData.intro}</p>
         </div>
         <hr className="mb-4" />
         <div className="rounded-lg border py-2 px-4 mb-4">
@@ -82,7 +82,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
             <Carousel
               align="start"
               slideSize="100%"
-              height={375}
+              height={200}
               slideGap="xl"
               loop
             >
@@ -90,7 +90,7 @@ const ViewPoll = ({ openedView, setOpenedView, pollData }) => {
                 const list = (
                   <>
                     <div
-                      className="rounded-lg border border-gray-300 shadow-lg m-2 w-fit h-fit cursor-pointer"
+                      className="rounded-lg border border-gray-300 shadow-lg m-2 w-56 h-fit cursor-pointer"
                       key={index}
                     >
                       <CandidateAvatar CandidateID={candidate.id} />
