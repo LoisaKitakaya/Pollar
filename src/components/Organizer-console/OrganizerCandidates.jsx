@@ -1,8 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import { Carousel } from "@mantine/carousel";
+import { Menu } from "@mantine/core";
+import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 
 import CandidateAvatar from "./Candidate-modals/CandidateAvatar";
+import EditCandidate from "./Candidate-modals/EditCandidate";
 import ViewCandidate from "./Candidate-modals/ViewCandidate";
 
 const GET_MY_CANDIDATES = gql`
@@ -46,7 +48,7 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
   return (
     <div>
       {/* body */}
-      <div className="h-full py-4 px-20">
+      <div className="h-full py-4 px-20 w-10/12 m-auto">
         {data.organizerCandidates.length === 0 ? (
           <div className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg">
             <h1 className="text-4xl text-center mb-6">
@@ -58,48 +60,63 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
             </p>
           </div>
         ) : (
-          <Carousel
-            slideSize="70%"
-            height={230}
-            slideGap="md"
-            controlsOffset="xl"
-            loop
-            withIndicators
-            className="my-36"
-          >
+          <div className="my-8 flex flex-wrap">
             {data.organizerCandidates.map((candidate, index) => {
               const list = (
                 <>
                   <div
-                    className="w-56 h-full mx-2 bg-slate-100 rounded-lg shadow-lg border border-gray-300 cursor-pointer"
+                    className="w-56 h-full my-4 mx-2 bg-slate-100 rounded-lg border border-gray-300 cursor-pointer shadow-md hover:shadow-lg hover:scale-105 ease-in-out duration-200"
                     key={index}
-                    onClick={() => {
+                    onDoubleClick={() => {
                       setCandidateData(candidate);
 
                       setViewCandidate(true);
                     }}
                   >
                     <CandidateAvatar CandidateID={candidate.id} />
-                    <div className="m-1 p-2">
-                      <p className="text-lg mb-4 flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                          />
-                        </svg>{" "}
-                        <span className="ml-2">
-                          {candidate.firstName} {candidate.lastName}
-                        </span>
+                    <div className="m-1 p-2 flex justify-between">
+                      <p className="text-lg">
+                        {candidate.firstName} {candidate.lastName}
                       </p>
+                      <Menu
+                        shadow="md"
+                        width={100}
+                        position="top"
+                        offset={-5}
+                        trigger="hover"
+                        openDelay={100}
+                        closeDelay={400}
+                      >
+                        <Menu.Target>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                            />
+                          </svg>
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                          <Menu.Item
+                            icon={<IconEdit size={14} />}
+                            onClick={() => setEditCandidate(true)}
+                          >
+                            Edit
+                          </Menu.Item>
+                          <Menu.Divider />
+                          <Menu.Item color="red" icon={<IconTrash size={14} />}>
+                            Delete
+                          </Menu.Item>
+                        </Menu.Dropdown>
+                      </Menu>
                     </div>
                   </div>
                 </>
@@ -107,7 +124,7 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
 
               return list;
             })}
-          </Carousel>
+          </div>
         )}
       </div>
       {/* body */}
@@ -121,6 +138,10 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
       {/* view candidate modal */}
 
       {/* edit candidate modal */}
+      <EditCandidate
+        editCandidate={editCandidate}
+        setEditCandidate={setEditCandidate}
+      />
       {/* edit candidate modal */}
     </div>
   );

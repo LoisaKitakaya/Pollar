@@ -12,7 +12,7 @@ const Controls = ({ opened, setOpened }) => {
   const title = opened ? "Close navigation" : "Open navigation";
 
   return (
-    <div className="flex items-center justify-between py-1 px-16 bg-slate-100 shadow-lg sticky top-0 w-full">
+    <div className="flex items-center justify-between py-1 px-16 bg-slate-100 shadow-lg sticky top-0 w-full z-50">
       <a href="/" className="flex items-center">
         <img
           className="w-14"
