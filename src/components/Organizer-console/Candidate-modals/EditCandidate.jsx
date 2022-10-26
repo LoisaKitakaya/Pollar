@@ -1,39 +1,9 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { gql, useQuery } from "@apollo/client";
 import ImageForm from "./ImageForm";
 import DetailForm from "./DetailForm";
 
-const GET_MY_POLLS = gql`
-  query GetMyPolls {
-    organizerPolls {
-      id
-      seat
-      intro
-      open
-      beginDate
-      endDate
-      candidateSet {
-        id
-        firstName
-        lastName
-        bio
-        image
-      }
-    }
-  }
-`;
-
-const EditCandidate = ({ editCandidate, setEditCandidate }) => {
+const EditCandidate = ({ editCandidate, setEditCandidate, candidateData }) => {
   const theme = useMantineTheme();
-
-  const { loading, error, data } = useQuery(GET_MY_POLLS);
-
-  if (data) {
-    console.log(data);
-    console.log("Data fetched successfully.");
-  }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
 
   return (
     <div>
@@ -54,7 +24,7 @@ const EditCandidate = ({ editCandidate, setEditCandidate }) => {
         <ImageForm />
         <hr className="my-4" />
         <p className="text-lg text-center">Candidate details</p>
-        <DetailForm allPolls={data.organizerPolls} />
+        <DetailForm candidateData={candidateData} />
       </Modal>
     </div>
   );

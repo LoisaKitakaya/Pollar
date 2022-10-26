@@ -70,7 +70,7 @@ const OrganizerPolls = ({ opened, setOpened }) => {
               const list = (
                 <>
                   <div
-                    className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-lg flex items-center justify-between"
+                    className="w-3/4 mx-auto my-8 py-6 px-4 bg-slate-100 rounded-md shadow-md hover:shadow-lg flex items-center justify-between hover:scale-105 ease-in-out duration-200"
                     key={index}
                   >
                     <div>

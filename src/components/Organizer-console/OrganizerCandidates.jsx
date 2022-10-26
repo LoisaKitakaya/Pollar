@@ -4,6 +4,7 @@ import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 
 import CandidateAvatar from "./Candidate-modals/CandidateAvatar";
+import DeleteCandidate from "./Candidate-modals/DeleteCandidate";
 import EditCandidate from "./Candidate-modals/EditCandidate";
 import ViewCandidate from "./Candidate-modals/ViewCandidate";
 
@@ -107,13 +108,17 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
                         <Menu.Dropdown>
                           <Menu.Item
                             icon={<IconEdit size={14} />}
-                            onClick={() => setEditCandidate(true)}
+                            onClick={() => {
+                              setCandidateData(candidate);
+
+                              setEditCandidate(true);
+                            }}
                           >
                             Edit
                           </Menu.Item>
                           <Menu.Divider />
                           <Menu.Item color="red" icon={<IconTrash size={14} />}>
-                            Delete
+                            <DeleteCandidate candidateData={candidate} />
                           </Menu.Item>
                         </Menu.Dropdown>
                       </Menu>
@@ -139,6 +144,7 @@ const OrganizerCandidates = ({ opened, setOpened }) => {
 
       {/* edit candidate modal */}
       <EditCandidate
+        candidateData={candidateData}
         editCandidate={editCandidate}
         setEditCandidate={setEditCandidate}
       />
