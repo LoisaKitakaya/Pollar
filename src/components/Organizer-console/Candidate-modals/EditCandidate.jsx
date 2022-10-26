@@ -21,7 +21,7 @@ const EditCandidate = ({ editCandidate, setEditCandidate, candidateData }) => {
         size="lg"
       >
         <p className="text-lg text-center">Candidate avatar</p>
-        <ImageForm />
+        <ImageForm candidateData={candidateData} />
         <hr className="my-4" />
         <p className="text-lg text-center">Candidate details</p>
         <DetailForm candidateData={candidateData} />
