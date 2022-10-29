@@ -1,97 +1,176 @@
+import { gql, useQuery } from "@apollo/client";
+import OrganizerImage from "./Profile-modals/OrganizerImage";
+
+const MY_ACCOUNT = gql`
+  query MyAccount {
+    myOrganizerAccount {
+      id
+      user {
+        id
+        username
+        firstName
+        lastName
+        email
+      }
+      phone
+      country
+      paidStatus
+      runningPackage
+      workspaceSet {
+        name
+        voterLimit
+        pollLimit
+      }
+    }
+  }
+`;
+
 const OrganizerProfile = ({ opened, setOpened }) => {
+  const { loading, error, data } = useQuery(MY_ACCOUNT);
+
+  if (data) {
+    console.log(data);
+    console.log("Data fetched successfully.");
+  }
+  if (loading) return "Fetching...";
+  if (error) return `Fetching error! ${error.message}`;
+
+  const organizerData = data.myOrganizerAccount;
+  const workspaceData = data.myOrganizerAccount.workspaceSet[0];
+
   return (
     <div>
       {/* body */}
       <div className="h-full py-4 px-20">
-        <h1 className="text-4xl text-center">Profile</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-          doloremque molestias, voluptas maiores accusantium architecto
-          accusamus deleniti rerum vero debitis, consequatur praesentium? Ab est
-          fugiat harum voluptates rem ut, cupiditate eum, alias eligendi, at
-          optio culpa! Veniam nihil repudiandae voluptates corporis quo odio
-          corrupti ratione hic. Officiis sit aliquam eligendi rem eaque in,
-          aperiam nesciunt dolorum architecto repellendus dolor suscipit error
-          nisi iure sed, omnis molestiae inventore illum! Neque natus animi eos
-          voluptas hic dolorum sint, quasi consequatur? Voluptate molestiae
-          repellat quisquam maiores reiciendis sunt! Labore nesciunt assumenda
-          aperiam, ipsum harum eum sint veniam placeat delectus, inventore
-          laborum debitis a neque, velit aliquid provident quaerat magni? Amet,
-          libero rerum consequuntur reprehenderit possimus voluptates quod
-          repudiandae, mollitia itaque blanditiis consectetur. Ipsum ducimus eum
-          reprehenderit consectetur dolorum nemo atque dolore, suscipit
-          corrupti, qui totam libero, neque sint? Labore aliquid, excepturi
-          praesentium repellendus sint quod quaerat fugit nobis eos? Totam ullam
-          voluptatibus sint cum fugit laudantium magnam eius delectus. Dolor
-          praesentium consectetur, consequuntur asperiores ea tempora deleniti
-          voluptas nemo rem dolorum. Commodi vitae fugit aperiam voluptatem
-          nulla vero, voluptatum possimus saepe! Molestias minima deleniti ut
-          iste asperiores atque minus error tempore eos. Eligendi at, maiores,
-          adipisci assumenda eveniet quam iure atque praesentium illo excepturi
-          vel est facere ad eius sapiente officiis. Obcaecati laudantium
-          voluptatem officiis labore praesentium omnis soluta quibusdam cum!
-          Eveniet ipsam iste, fugiat omnis quia totam dolore minima explicabo
-          officiis corrupti, eos asperiores natus, laborum sapiente nulla
-          quibusdam accusantium temporibus provident assumenda quam! Aliquid
-          dolor harum id quis ex ipsam, totam nulla excepturi sequi, sint cum
-          quod architecto odit consectetur vel error laudantium a earum ipsa
-          facere delectus! Rerum ex molestias, tenetur culpa qui eveniet
-          expedita delectus sed adipisci facere! Eveniet non porro aliquam
-          distinctio reprehenderit cupiditate, sapiente necessitatibus ut
-          officiis repudiandae nisi, rerum cum magni laborum sequi consectetur
-          beatae fugit labore eligendi eos suscipit nihil? Deleniti nemo
-          voluptatem quidem ratione, deserunt impedit sed commodi repudiandae
-          iste! Illum similique consequuntur soluta nobis sed dolore, doloremque
-          fuga quos dolorem, quidem est laboriosam! Est ratione blanditiis
-          dolorem quia. Enim quae, dolorem a hic dicta quo? Voluptatum vitae id
-          excepturi fugit sed molestias alias iste atque maxime animi, quia
-          quasi delectus ipsa eum non eos perferendis omnis ratione a quo optio
-          consectetur fugiat minima dicta. Quod, consequatur impedit sint rerum
-          eum deleniti tempora voluptas est incidunt sunt esse suscipit, quasi,
-          dicta ipsam perferendis? Optio sit earum veritatis est dolore repellat
-          excepturi inventore, dignissimos ratione odio cupiditate architecto
-          doloremque delectus. Fuga voluptas, necessitatibus obcaecati dolor,
-          vel, ratione beatae excepturi iste dolorem magnam illo quam. In,
-          maxime odio adipisci necessitatibus saepe quasi animi molestias aut
-          eveniet ut fugiat nihil, ratione consequuntur suscipit quia cumque.
-          Quae sequi, et dicta odio ullam reprehenderit doloremque eos
-          blanditiis maiores molestias nostrum vero, quisquam tenetur ut.
-          Repellendus voluptatem ab ducimus voluptates rem aliquid! Neque
-          impedit maxime modi dicta hic delectus labore. Doloribus eum ut, porro
-          dolorum eveniet minima recusandae explicabo consectetur quo sequi,
-          repellendus assumenda ducimus cumque necessitatibus architecto magni
-          soluta laborum amet voluptatibus est consequuntur corrupti libero
-          tempore culpa. Recusandae error reprehenderit atque nobis molestiae
-          porro. Voluptate vitae temporibus, ipsam quaerat mollitia similique?
-          Reiciendis aut ullam excepturi, minima fugit magni minus, adipisci
-          omnis soluta, velit quos placeat? Consequuntur, accusamus aliquid
-          asperiores eligendi pariatur blanditiis nulla maiores assumenda
-          doloribus suscipit architecto non nam eveniet quae, modi repellendus
-          molestias totam, itaque alias ipsam nihil nisi maxime! Molestiae
-          mollitia natus fugiat veritatis numquam aperiam rem quidem dicta,
-          fuga, dolore asperiores accusantium obcaecati nemo sunt tenetur
-          explicabo consectetur molestias deserunt recusandae esse. Quaerat
-          illum porro eligendi architecto accusantium. Aperiam illo doloremque,
-          ducimus laudantium quis alias voluptate, dicta eos quae, quia dolores
-          commodi nam corrupti quo aliquam error quos dolor vitae. Laborum sint
-          aliquid, asperiores facilis consequatur quos necessitatibus, deserunt
-          corrupti pariatur cupiditate non delectus assumenda fuga labore
-          maiores. Porro, perferendis maiores tempore voluptatum odit aliquid.
-          Corrupti aperiam cupiditate sunt animi esse molestiae eum natus eos
-          quidem! Quisquam vitae accusamus tenetur quod cum fugiat suscipit
-          aliquam quo! Pariatur iusto officiis voluptatibus, non culpa atque
-          esse cumque! Hic, delectus. Ratione sapiente sequi ullam accusantium
-          numquam labore. Ducimus iure iusto, perspiciatis laboriosam rem dolor
-          maiores optio eius asperiores. Sint, eos! Rerum voluptatibus,
-          distinctio at exercitationem ratione necessitatibus, incidunt ipsum
-          suscipit explicabo quaerat commodi maxime temporibus quo nulla enim
-          perferendis nobis! Eaque laboriosam facilis non, expedita praesentium
-          optio unde iusto sequi ratione fugiat doloribus dolore esse, incidunt
-          labore a delectus tempora odit libero iste nobis maxime molestiae
-          eveniet inventore quisquam? Id veritatis, quis aliquid fugit ullam
-          maiores. Cumque magni ut harum recusandae eum beatae totam ipsam
-          eveniet consequatur.
-        </p>
+        <div className="p-2 flex justify-between mb-4">
+          <div className="rounded-md border w-2/4 shadow-md h-full my-4">
+            <OrganizerImage />
+          </div>
+          <div className="py-4 px-8">
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">Username</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.user.username}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">
+                First name
+              </p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.user.firstName}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">Last name</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.user.lastName}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">Email</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.user.email}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">Phone</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.phone}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="font-light text-lg text-gray-600 mb-2">Country</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.country}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr className="mb-8" />
+
+        <div className="mb-4">
+          <h3 className="text-2xl text-center mb-16">Account details</h3>
+          <div className="flex items-center justify-evenly">
+            <div className="mx-2">
+              <p className="font-light text-lg text-gray-600 mb-2 text-center">
+                Workspace
+              </p>
+              <p className="text-2xl font-semibold text-gray-900 text-center">
+                {workspaceData.name}
+              </p>
+            </div>
+            <div className="mx-2">
+              <p className="font-light text-lg text-gray-600 mb-2 text-center">
+                Poll limit
+              </p>
+              <p className="text-2xl font-semibold text-gray-900 text-center">
+                {workspaceData.pollLimit}
+              </p>
+            </div>
+            <div className="mx-2">
+              <p className="font-light text-lg text-gray-600 mb-2 text-center">
+                Voter limit
+              </p>
+              <p className="text-2xl font-semibold text-gray-900 text-center">
+                {workspaceData.voterLimit}
+              </p>
+            </div>
+            <div className="mx-2">
+              <p className="font-light text-lg text-gray-600 mb-2 text-center">
+                Running package
+              </p>
+              <p className="text-2xl font-semibold text-gray-900 text-center">
+                {organizerData.runningPackage}
+              </p>
+            </div>
+            <div className="mx-2">
+              <p className="font-light text-lg text-gray-600 mb-2 text-center">
+                Paid account
+              </p>
+              <p className="text-2xl font-semibold text-gray-900">
+                {organizerData.paidStatus === true ? (
+                  <span className="text-green-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 m-auto"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                ) : (
+                  <span className="text-red-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-8 h-8 m-auto"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr className="mt-16 mb-4" />
       </div>
       {/* body */}
     </div>
