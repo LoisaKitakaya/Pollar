@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 
-import Controls from "../../components/Controls";
+import Controls from "../../components/OrganizerControls";
 import OrganizerCandidates from "../../components/Organizer-console/OrganizerCandidates";
 import OrganizerPolls from "../../components/Organizer-console/OrganizerPolls";
 import OrganizerProfile from "../../components/Organizer-console/OrganizerProfile";
