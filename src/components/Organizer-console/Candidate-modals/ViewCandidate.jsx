@@ -17,9 +17,9 @@ const ViewCandidate = ({ candidateData, viewCandidate, setViewCandidate }) => {
         opened={viewCandidate}
         onClose={() => setViewCandidate(false)}
         withCloseButton={false}
-        size="70%"
+        size="lg"
       >
-        <div className="mb-4 w-2/4 mx-auto shadow-lg border border-gray-400 rounded-t-lg">
+        <div className="mb-4 w-3/4 mx-auto shadow-lg border border-gray-400 rounded-t-lg">
           <CandidateAvatar CandidateID={candidateData.id} />
         </div>
         <div className="mb-4 flex items-center">
@@ -55,25 +55,14 @@ const ViewCandidate = ({ candidateData, viewCandidate, setViewCandidate }) => {
             <p className="font-light text-lg text-gray-600 mb-2">
               Contending for
             </p>
-            {/* {typeof candidateData.poll != "undefined" &&
+            {typeof candidateData.poll != "undefined" &&
             candidateData.poll != null ? (
               <p className="text-2xl font-semibold text-gray-900">
                 {candidateData.poll.seat}
               </p>
             ) : (
               <p className="text-2xl font-semibold text-gray-900"></p>
-            )} */}
-          </div>
-          <div className="py-2 px-4 ml-4">
-            <p className="font-light text-lg text-gray-600 mb-2">Workspace</p>
-            {/* {typeof candidateData.poll.workspace != "undefined" &&
-            candidateData.poll.workspace != null ? (
-              <p className="text-2xl font-semibold text-gray-900">
-                {candidateData.poll.workspace.name}
-              </p>
-            ) : (
-              <p className="text-2xl font-semibold text-gray-900"></p>
-            )} */}
+            )}
           </div>
         </div>
         <div className="py-2 px-4 mb-4">
