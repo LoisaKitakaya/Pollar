@@ -1,4 +1,5 @@
 import { Menu, Text, Kbd } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 import {
   IconEdit,
   IconSearch,
@@ -10,6 +11,18 @@ import UpdateProfile from "../Organizer-console/Profile-modals/UpdateProfile";
 
 const OrganizerSettings = () => {
   const [opened, setOpened] = useState(false);
+
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("authenticated");
+
+    navigate("/");
+
+    window.location.reload(false);
+  };
 
   return (
     <div>
@@ -65,9 +78,11 @@ const OrganizerSettings = () => {
           </Menu.Item>
           <Menu.Divider />
           <Menu.Label>Console</Menu.Label>
-          <Menu.Item color="red" icon={<IconTransferOut size={14} />}>
-            Log out
-          </Menu.Item>
+          <div onClick={() => logOut()}>
+            <Menu.Item color="red" icon={<IconTransferOut size={14} />}>
+              Log out
+            </Menu.Item>
+          </div>
         </Menu.Dropdown>
       </Menu>
 
