@@ -25,7 +25,7 @@ const MY_ACCOUNT = gql`
   }
 `;
 
-const OrganizerProfile = ({ opened, setOpened }) => {
+const OrganizerProfile = () => {
   const { loading, error, data } = useQuery(MY_ACCOUNT);
 
   if (data) {
