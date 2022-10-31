@@ -24,7 +24,6 @@ const GET_MY_POLLS = gql`
         firstName
         lastName
         bio
-        image
       }
     }
   }

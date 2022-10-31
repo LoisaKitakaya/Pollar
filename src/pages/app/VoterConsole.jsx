@@ -1,9 +1,5 @@
 import { Tabs, Drawer, useMantineTheme } from "@mantine/core";
-import {
-  IconLicense,
-  IconUserCircle,
-  IconPackage,
-} from "@tabler/icons";
+import { IconLicense, IconUserCircle, IconPackage } from "@tabler/icons";
 import { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 
@@ -22,12 +18,17 @@ const CHECK_MY_ACCOUNT = gql`
         email
         isActive
       }
+      workspace {
+        organizer {
+          id
+        }
+      }
     }
   }
 `;
 
 const VoterConsole = () => {
-  PageTitle("Voter console")
+  PageTitle("Voter console");
 
   const [opened, setOpened] = useState(false);
 
@@ -96,15 +97,17 @@ const VoterConsole = () => {
         </Drawer>
 
         <Tabs.Panel value="rules">
-          <VoterRules opened={opened} setOpened={setOpened} />
+          <VoterRules />
         </Tabs.Panel>
 
         <Tabs.Panel value="polls">
-          <VoterPolls opened={opened} setOpened={setOpened} />
+          <VoterPolls
+            organizerID={data.myVoterAccount.workspace.organizer.id}
+          />
         </Tabs.Panel>
 
         <Tabs.Panel value="profile">
-          <VoterProfile opened={opened} setOpened={setOpened} />
+          <VoterProfile />
         </Tabs.Panel>
       </Tabs>
     </div>

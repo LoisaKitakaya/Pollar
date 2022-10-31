@@ -105,19 +105,19 @@ const OrganizerConsole = () => {
         </Drawer>
 
         <Tabs.Panel value="rules">
-          <OrganizerRules opened={opened} setOpened={setOpened} />
+          <OrganizerRules />
         </Tabs.Panel>
 
         <Tabs.Panel value="polls">
-          <OrganizerPolls opened={opened} setOpened={setOpened} />
+          <OrganizerPolls />
         </Tabs.Panel>
 
         <Tabs.Panel value="candidates">
-          <OrganizerCandidates opened={opened} setOpened={setOpened} />
+          <OrganizerCandidates />
         </Tabs.Panel>
 
         <Tabs.Panel value="profile">
-          <OrganizerProfile opened={opened} setOpened={setOpened} />
+          <OrganizerProfile />
         </Tabs.Panel>
       </Tabs>
     </div>
