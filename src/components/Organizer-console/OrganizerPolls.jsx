@@ -30,7 +30,7 @@ const GET_MY_POLLS = gql`
   }
 `;
 
-const OrganizerPolls = ({ opened, setOpened }) => {
+const OrganizerPolls = () => {
   const [openedView, setOpenedView] = useState(false);
   const [openedCreate, setOpenedCreate] = useState(false);
   const [openedEdit, setOpenedEdit] = useState(false);

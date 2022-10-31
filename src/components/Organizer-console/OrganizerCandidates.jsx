@@ -31,7 +31,7 @@ const GET_MY_CANDIDATES = gql`
   }
 `;
 
-const OrganizerCandidates = ({ opened, setOpened }) => {
+const OrganizerCandidates = () => {
   const [viewCandidate, setViewCandidate] = useState(false);
   const [editCandidate, setEditCandidate] = useState(false);
 

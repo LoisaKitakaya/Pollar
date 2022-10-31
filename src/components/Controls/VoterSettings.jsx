@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   IconEdit,
   IconSearch,
-  IconReceipt2,
   IconTransferOut,
 } from "@tabler/icons";
 import { useState } from "react";
@@ -61,7 +60,6 @@ const VoterSettings = () => {
 
         <Menu.Dropdown>
           <Menu.Label>Account</Menu.Label>
-          <Menu.Item icon={<IconReceipt2 size={14} />}>Upgrade</Menu.Item>
           <div onClick={() => setOpened(true)}>
             <Menu.Item icon={<IconEdit size={14} />}>Edit profile</Menu.Item>
           </div>

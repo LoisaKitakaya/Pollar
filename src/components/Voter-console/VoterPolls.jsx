@@ -1,4 +1,4 @@
-const VoterPolls = ({ opened, setOpened }) => {
+const VoterPolls = () => {
   return null;
 };
 

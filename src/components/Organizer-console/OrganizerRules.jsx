@@ -4,7 +4,7 @@ import data from "../Organizer-console/data.json";
 
 const rules = data.rules;
 
-const OrganizerRules = ({ opened, setOpened }) => {
+const OrganizerRules = () => {
   return (
     <div>
       {/* body */}
