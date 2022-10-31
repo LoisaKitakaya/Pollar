@@ -1,5 +1,42 @@
+import { gql, useQuery } from "@apollo/client";
+import { Avatar } from "@mantine/core";
+import { useState } from "react";
+import AvatarUpload from "../Voter-console/Profile-modals/AvatarUpload";
+
+const MY_AVATAR = gql`
+  query myAvatar {
+    voterAvatar
+  }
+`;
+
 const VoterAvatar = () => {
-  return null;
+  const [opened, setOpened] = useState(false);
+
+  const { loading, error, data } = useQuery(MY_AVATAR);
+
+  if (data) {
+    console.log(data);
+    console.log("Data fetched successfully.");
+  }
+  if (loading) return "Fetching...";
+  if (error) return `Fetching error! ${error.message}`;
+
+  return (
+    <div>
+      <Avatar
+        src={data.voterAvatar}
+        alt="avatar"
+        color="blue"
+        radius="xl"
+        className="cursor-pointer mx-4 shadow-md"
+        onClick={() => setOpened(true)}
+      />
+
+      {/* upload organizer avatar */}
+      <AvatarUpload opened={opened} setOpened={setOpened} />
+      {/* upload organizer avatar */}
+    </div>
+  );
 };
 
 export default VoterAvatar;

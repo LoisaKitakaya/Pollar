@@ -7,6 +7,7 @@ import {
   IconTransferOut,
 } from "@tabler/icons";
 import { useState } from "react";
+
 import UpdateProfile from "../Organizer-console/Profile-modals/UpdateProfile";
 
 const OrganizerSettings = () => {

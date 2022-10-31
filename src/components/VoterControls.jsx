@@ -6,7 +6,8 @@ import {
   IconMessageCircle,
   IconTrash,
 } from "@tabler/icons";
-import OrganizerAvatar from "./Controls/OrganizerAvatar";
+
+import VoterAvatar from "./Controls/VoterAvatar";
 
 const VoterControls = ({ opened, setOpened }) => {
   const title = opened ? "Close navigation" : "Open navigation";
@@ -24,7 +25,7 @@ const VoterControls = ({ opened, setOpened }) => {
         </h1>
       </a>
       <div className="flex items-center">
-        <OrganizerAvatar />
+        <VoterAvatar />
         <Menu
           shadow="md"
           width={200}

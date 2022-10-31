@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 
 import { Autocomplete } from "@mantine/core";
 import { useState } from "react";
@@ -32,9 +33,13 @@ const RegisterVoter = ({ workspaceData }) => {
 
   const [registerVoter, { data, loading, error }] = useMutation(REGISTER_VOTER);
 
+  const navigate = useNavigate();
+
   if (data) {
     console.log(data);
     console.log("Account registration success. Redirecting to console.");
+
+    navigate("/app/voter_console/");
   }
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;

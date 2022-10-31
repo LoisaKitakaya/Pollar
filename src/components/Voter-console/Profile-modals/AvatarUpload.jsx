@@ -4,7 +4,7 @@ import axios from "axios";
 
 const MY_ACCOUNT = gql`
   query MyAccount {
-    myOrganizerAccount {
+    myVoterAccount {
       id
       user {
         id
@@ -13,22 +13,14 @@ const MY_ACCOUNT = gql`
         lastName
         email
       }
-      phone
       country
-      paidStatus
-      runningPackage
-      workspaceSet {
-        name
-        voterLimit
-        pollLimit
-      }
     }
   }
 `;
 
-const url = "http://127.0.0.1:8000/organizers/upload_avatar/";
+const url = "http://127.0.0.1:8000/voters/upload_avatar/";
 
-const UploadAvatar = ({ opened, setOpened }) => {
+const AvatarUpload = ({ opened, setOpened }) => {
   const theme = useMantineTheme();
 
   const { loading, error, data } = useQuery(MY_ACCOUNT);
@@ -40,7 +32,7 @@ const UploadAvatar = ({ opened, setOpened }) => {
   if (loading) return "Fetching...";
   if (error) return `Fetching error! ${error.message}`;
 
-  const organizerData = data.myOrganizerAccount;
+  const voterData = data.myVoterAccount;
 
   const handleSubmit = (data) => {
     axios
@@ -73,7 +65,7 @@ const UploadAvatar = ({ opened, setOpened }) => {
       opened={opened}
       onClose={() => setOpened(false)}
     >
-      <p className="text-lg text-center mb-4">Organizer avatar</p>
+      <p className="text-lg text-center mb-4">voter avatar</p>
       <form
         className="px-4"
         encType="multipart/form-data"
@@ -81,7 +73,7 @@ const UploadAvatar = ({ opened, setOpened }) => {
           e.preventDefault();
 
           const data = {
-            id: organizerData.id,
+            id: voterData.id,
             image: e.target.image.files[0],
           };
 
@@ -106,4 +98,4 @@ const UploadAvatar = ({ opened, setOpened }) => {
   );
 };
 
-export default UploadAvatar;
+export default AvatarUpload;

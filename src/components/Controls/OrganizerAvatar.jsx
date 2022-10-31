@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { Avatar } from "@mantine/core";
 import { useState } from "react";
+
 import UploadAvatar from "../Organizer-console/Profile-modals/UploadAvatar";
 
 const MY_AVATAR = gql`
