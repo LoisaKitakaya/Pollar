@@ -4,6 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 import PollView from "./Poll-modals/PollView";
 import Ballot from "./Poll-modals/Ballot";
+import { Link } from "react-router-dom";
 
 const GET_MY_POLLS = gql`
   query GetMyPolls($id: String!) {
@@ -115,9 +116,10 @@ const VoterPolls = ({ organizerID }) => {
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
-                          onClick={() => {}}
                         >
-                          <IconFileAnalytics />
+                          <Link to={`/app/results/${poll.id}`} target="_blank">
+                            <IconFileAnalytics />
+                          </Link>
                         </ThemeIcon>
                       </Tooltip>
                       {poll.open ? (
