@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import OrganizerConsole from "./pages/app/OrganizerConsole";
+import Results from "./pages/app/Results";
 import VoterConsole from "./pages/app/VoterConsole";
 import Accounts from "./pages/auth/Accounts";
 import SignIn from "./pages/auth/SignIn";
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/auth/accounts/" element={<Accounts />} />
       <Route path="/app/organizer_console/" element={<OrganizerConsole />} />
       <Route path="/app/voter_console/" element={<VoterConsole />} />
+      <Route path="/app/results/:id" element={<Results />} />
     </Routes>
   );
 };
