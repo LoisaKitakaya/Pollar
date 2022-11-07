@@ -1,7 +1,8 @@
 import { ThemeIcon, Tooltip } from "@mantine/core";
-import { IconEye, IconEdit } from "@tabler/icons";
+import { IconEye, IconEdit, IconFileAnalytics } from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import ViewPoll from "./Poll-modals/ViewPoll";
 import CreatePoll from "./Poll-modals/CreatePoll";
@@ -108,6 +109,19 @@ const OrganizerPolls = () => {
                           }}
                         >
                           <IconEdit />
+                        </ThemeIcon>
+                      </Tooltip>
+                      <Tooltip label="view results" color="dark" withArrow>
+                        <ThemeIcon
+                          variant="outline"
+                          color="green"
+                          radius="md"
+                          size="lg"
+                          className="cursor-pointer mx-1"
+                        >
+                          <Link to={`/app/results/${poll.id}`} target="_blank">
+                            <IconFileAnalytics />
+                          </Link>
                         </ThemeIcon>
                       </Tooltip>
                       {poll.open ? <ClosePoll PollID={poll.id} /> : <div></div>}
