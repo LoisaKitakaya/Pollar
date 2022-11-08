@@ -1,6 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
+import loader from "../../assets/Lazy-Loader/150x150.gif";
+
 const REGISTER_ORGANIZER = gql`
   mutation RegisterOrganizer(
     $phone: String!
@@ -37,9 +39,21 @@ const RegisterOrganizer = () => {
     console.log(data);
     console.log("Account registration success. Redirecting to console.");
 
-    navigate("/app/organizer_console/")
+    navigate("/app/organizer_console/");
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-12">
+            <img src={loader} className="m-auto" alt="loader" />
+            <p className="text-center text-2xl my-8 text-gray-500 font-semibold">
+              Loading... Please wait
+            </p>
+          </div>
+        </div>
+      </>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (
