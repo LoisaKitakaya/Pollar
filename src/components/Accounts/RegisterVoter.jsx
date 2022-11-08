@@ -1,14 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-
 import { Autocomplete } from "@mantine/core";
 import { useState } from "react";
 
+import loader from "../../assets/Lazy-Loader/150x150.gif";
+
 const REGISTER_VOTER = gql`
-  mutation RegisterVoter(
-    $country: String!
-    $workspace: String!
-  ) {
+  mutation RegisterVoter($country: String!, $workspace: String!) {
     registerVoter(country: $country, workspace: $workspace) {
       voter {
         user {
@@ -41,7 +39,19 @@ const RegisterVoter = ({ workspaceData }) => {
 
     navigate("/app/voter_console/");
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-12">
+            <img src={loader} className="m-auto" alt="loader" />
+            <p className="text-center text-2xl my-8 text-gray-500 font-semibold">
+              Loading... Please wait
+            </p>
+          </div>
+        </div>
+      </>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (

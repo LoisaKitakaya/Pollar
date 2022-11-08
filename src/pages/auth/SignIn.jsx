@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import PageTitle from "../../pageTitle";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const TOKEN_AUTH = gql`
   mutation TokenAuth($username: String!, $password: String!) {
@@ -37,7 +38,16 @@ const SignIn = () => {
 
     navigate("/intersection/");
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-52">
+            <img src={loader} className="m-auto" alt="loader" />
+          </div>
+        </div>
+      </>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (
