@@ -30,7 +30,7 @@ const GET_MY_POLLS = gql`
   }
 `;
 
-const ClosePoll = ({ PollID }) => {
+const ClosePoll = ({ PollID, closeState, setCloseState }) => {
   const [closePoll, { data, loading, error }] = useMutation(CLOSE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -41,34 +41,39 @@ const ClosePoll = ({ PollID }) => {
     console.log(data);
     console.log("This poll has been closed.");
   }
-  if (loading) return (
-    <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-      <Notification
-        loading
-        color="green"
-        disallowClose
-        className="w-fit bg-zinc-300 rounded-md"
-      >
-        <span className="text-black text-xl">Loading... Please wait</span>
-      </Notification>
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (
     <div>
       <Tooltip label="close poll" color="dark" withArrow>
         <ThemeIcon
-          variant="outline"
+          variant={closeState}
           color="orange"
           radius="md"
           size="lg"
           className="cursor-pointer mx-1"
-          onClick={() => closePoll({
-            variables: {
-                id: PollID
-            }
-          })}
+          onClick={() =>
+            closePoll({
+              variables: {
+                id: PollID,
+              },
+            })
+          }
+          onMouseEnter={() => setCloseState("fill")}
+          onMouseLeave={() => setCloseState("outline")}
         >
           <IconLockAccess />
         </ThemeIcon>
