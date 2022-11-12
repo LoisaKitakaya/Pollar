@@ -7,6 +7,7 @@ import CandidateAvatar from "./Candidate-modals/CandidateAvatar";
 import DeleteCandidate from "./Candidate-modals/DeleteCandidate";
 import EditCandidate from "./Candidate-modals/EditCandidate";
 import ViewCandidate from "./Candidate-modals/ViewCandidate";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const GET_MY_CANDIDATES = gql`
   query GetMyCandidates {
@@ -43,7 +44,15 @@ const OrganizerCandidates = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-20">
+          <img src={loader} className="mx-auto my-36" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
