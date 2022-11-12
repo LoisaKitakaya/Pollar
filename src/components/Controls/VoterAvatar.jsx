@@ -1,6 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { Avatar } from "@mantine/core";
 import { useState } from "react";
+import { Skeleton } from "@mantine/core";
+
 import AvatarUpload from "../Voter-console/Profile-modals/AvatarUpload";
 
 const MY_AVATAR = gql`
@@ -18,7 +20,13 @@ const VoterAvatar = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="mx-4 shadow-md rounded-full">
+        <Skeleton height={38} circle />
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
