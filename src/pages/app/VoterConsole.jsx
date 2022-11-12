@@ -8,6 +8,7 @@ import VoterRules from "../../components/Voter-console/VoterRules";
 import VoterPolls from "../../components/Voter-console/VoterPolls";
 import VoterProfile from "../../components/Voter-console/VoterProfile";
 import VoterControls from "../../components/VoterControls";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const CHECK_MY_ACCOUNT = gql`
   query voterCheck {
@@ -40,7 +41,15 @@ const VoterConsole = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-52">
+          <img src={loader} className="m-auto" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
