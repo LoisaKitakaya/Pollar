@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
+
 import OrganizerImage from "./Profile-modals/OrganizerImage";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const MY_ACCOUNT = gql`
   query MyAccount {
@@ -32,7 +34,15 @@ const OrganizerProfile = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-20">
+          <img src={loader} className="mx-auto my-36" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   const organizerData = data.myOrganizerAccount;

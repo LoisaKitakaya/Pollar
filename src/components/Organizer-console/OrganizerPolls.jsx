@@ -10,6 +10,7 @@ import EditPoll from "./Poll-modals/EditPoll";
 import RegisterCandidate from "./Candidate-modals/RegisterCandidate";
 import ClosePoll from "./Poll-modals/ClosePoll";
 import DeletePoll from "./Poll-modals/DeletePoll";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const GET_MY_POLLS = gql`
   query GetMyPolls {
@@ -45,7 +46,15 @@ const OrganizerPolls = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-20">
+          <img src={loader} className="mx-auto my-36" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   const PopulateAllPolls = () => setAllPolls(data.organizerPolls);

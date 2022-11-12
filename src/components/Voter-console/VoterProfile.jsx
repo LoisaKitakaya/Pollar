@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 
 import VoterOrganizerImage from "../Organizer-console/Profile-modals/VoterOrganizerImage";
-
 import VoterImage from "./Profile-modals/VoterImage";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const MY_ACCOUNT = gql`
   query MyAccount {
@@ -40,7 +40,15 @@ const VoterProfile = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-20">
+          <img src={loader} className="mx-auto my-36" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   const voterData = data.myVoterAccount;

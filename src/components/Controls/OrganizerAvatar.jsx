@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { Avatar } from "@mantine/core";
 import { useState } from "react";
+import { Skeleton } from "@mantine/core";
 
 import UploadAvatar from "../Organizer-console/Profile-modals/UploadAvatar";
 
@@ -19,7 +20,14 @@ const OrganizerAvatar = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading)
+    return (
+      <>
+        <div className="mx-4 shadow-md rounded-full">
+          <Skeleton height={38} circle />
+        </div>
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
