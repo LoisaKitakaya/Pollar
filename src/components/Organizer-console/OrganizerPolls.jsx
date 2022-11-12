@@ -40,21 +40,28 @@ const OrganizerPolls = () => {
   const [pollData, setPollData] = useState({});
   const [allPolls, setAllPolls] = useState([]);
 
+  const [viewState, setViewState] = useState("outline");
+  const [editState, setEditState] = useState("outline");
+  const [resultsState, setResultsState] = useState("outline");
+  const [closeState, setCloseState] = useState("outline");
+  const [deleteState, setDeleteState] = useState("outline");
+
   const { loading, error, data } = useQuery(GET_MY_POLLS);
 
   if (data) {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return (
-    <>
-      <div className="h-full w-full">
-        <div className="my-20">
-          <img src={loader} className="mx-auto my-36" alt="loader" />
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-20">
+            <img src={loader} className="mx-auto my-36" alt="loader" />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   const PopulateAllPolls = () => setAllPolls(data.organizerPolls);
@@ -90,7 +97,7 @@ const OrganizerPolls = () => {
                     <div className="flex items-center">
                       <Tooltip label="view poll" color="dark" withArrow>
                         <ThemeIcon
-                          variant="outline"
+                          variant={viewState}
                           color="blue"
                           radius="md"
                           size="lg"
@@ -100,13 +107,15 @@ const OrganizerPolls = () => {
 
                             setOpenedView(true);
                           }}
+                          onMouseEnter={() => setViewState("fill")}
+                          onMouseLeave={() => setViewState("outline")}
                         >
                           <IconEye />
                         </ThemeIcon>
                       </Tooltip>
                       <Tooltip label="edit poll" color="dark" withArrow>
                         <ThemeIcon
-                          variant="outline"
+                          variant={editState}
                           color="blue"
                           radius="md"
                           size="lg"
@@ -116,25 +125,41 @@ const OrganizerPolls = () => {
 
                             setOpenedEdit(true);
                           }}
+                          onMouseEnter={() => setEditState("fill")}
+                          onMouseLeave={() => setEditState("outline")}
                         >
                           <IconEdit />
                         </ThemeIcon>
                       </Tooltip>
                       <Tooltip label="view results" color="dark" withArrow>
                         <ThemeIcon
-                          variant="outline"
+                          variant={resultsState}
                           color="green"
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
+                          onMouseEnter={() => setResultsState("fill")}
+                          onMouseLeave={() => setResultsState("outline")}
                         >
                           <Link to={`/app/results/${poll.id}`} target="_blank">
                             <IconFileAnalytics />
                           </Link>
                         </ThemeIcon>
                       </Tooltip>
-                      {poll.open ? <ClosePoll PollID={poll.id} /> : <div></div>}
-                      <DeletePoll PollID={poll.id} />
+                      {poll.open ? (
+                        <ClosePoll
+                          PollID={poll.id}
+                          closeState={closeState}
+                          setCloseState={setCloseState}
+                        />
+                      ) : (
+                        <div></div>
+                      )}
+                      <DeletePoll
+                        PollID={poll.id}
+                        deleteState={deleteState}
+                        setDeleteState={setDeleteState}
+                      />
                       {poll.open ? (
                         <span className="mx-1 py-1 px-2 bg-emerald-300 rounded-md">
                           Status: Open
