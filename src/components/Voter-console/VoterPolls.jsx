@@ -2,9 +2,11 @@ import { ThemeIcon, Tooltip } from "@mantine/core";
 import { IconEye, IconArchive, IconFileAnalytics } from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import PollView from "./Poll-modals/PollView";
 import Ballot from "./Poll-modals/Ballot";
-import { Link } from "react-router-dom";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const GET_MY_POLLS = gql`
   query GetMyPolls($id: String!) {
@@ -40,7 +42,15 @@ const VoterPolls = ({ organizerID }) => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return "Fetching...";
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-20">
+          <img src={loader} className="mx-auto my-36" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
