@@ -1,5 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
+import { Notification } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 const UPDATE_ORGANIZER = gql`
@@ -9,7 +10,6 @@ const UPDATE_ORGANIZER = gql`
     $lastName: String!
     $phone: String!
     $country: String!
-    $workspace: String!
   ) {
     updateOrganizer(
       username: $username
@@ -17,7 +17,6 @@ const UPDATE_ORGANIZER = gql`
       lastName: $lastName
       phone: $phone
       country: $country
-      workspace: $workspace
     ) {
       organizer {
         id
@@ -28,9 +27,30 @@ const UPDATE_ORGANIZER = gql`
         }
         phone
         country
-        workspaceSet {
-          name
-        }
+      }
+    }
+  }
+`;
+
+const MY_ACCOUNT = gql`
+  query MyAccount {
+    myOrganizerAccount {
+      id
+      user {
+        id
+        username
+        firstName
+        lastName
+        email
+      }
+      phone
+      country
+      paidStatus
+      runningPackage
+      workspaceSet {
+        name
+        voterLimit
+        pollLimit
       }
     }
   }
@@ -39,18 +59,45 @@ const UPDATE_ORGANIZER = gql`
 const UpdateProfile = ({ opened, setOpened, organizerID }) => {
   const theme = useMantineTheme();
 
-  const [updateOrganizer, { data, loading, error }] =
-    useMutation(UPDATE_ORGANIZER);
+  const [updateOrganizer, { data, loading, error }] = useMutation(
+    UPDATE_ORGANIZER,
+    {
+      refetchQueries: [{ query: MY_ACCOUNT }],
+    }
+  );
 
   const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("authenticated");
+
+    window.location.reload(false);
+    
+    navigate("/auth/signin/");
+  };
 
   if (data) {
     console.log(data);
     console.log("Account registration success. Redirecting to console.");
 
-    navigate("/app/organizer_console/");
+    logOut();
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (
@@ -69,8 +116,12 @@ const UpdateProfile = ({ opened, setOpened, organizerID }) => {
         onClose={() => setOpened(false)}
       >
         <h1 className="text-xl text-center mb-4">Update profile</h1>
-        <form className="px-4" onSubmit={(e) => {
-            e.preventDefault()
+        <form
+          className="px-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            alert("Login again to have the changes take effect");
 
             updateOrganizer({
               variables: {
@@ -79,12 +130,12 @@ const UpdateProfile = ({ opened, setOpened, organizerID }) => {
                 lastName: e.target.lastname.value,
                 phone: e.target.phone.value,
                 country: e.target.country.value,
-                workspace: e.target.workspace.value,
               },
             });
 
             setOpened(false);
-        }}>
+          }}
+        >
           <label htmlFor="username" className="block mb-4">
             <span className="text-gray-700">
               Username<span className="text-red-700 text-3xl">*</span>
@@ -141,18 +192,6 @@ const UpdateProfile = ({ opened, setOpened, organizerID }) => {
               type="text"
               name="country"
               placeholder="e.g. Kenya"
-              required
-              className="mt-1 block w-full rounded-md shadow-sm bg-gray-200 border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 focus:ring focus:bg-gray-100"
-            />
-          </label>
-          <label htmlFor="workspace" className="block mb-4">
-            <span className="text-gray-700">
-              Workspace<span className="text-red-700 text-3xl">*</span>
-            </span>
-            <input
-              type="text"
-              name="workspace"
-              placeholder="e.g. Medical society elections"
               required
               className="mt-1 block w-full rounded-md shadow-sm bg-gray-200 border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 focus:ring focus:bg-gray-100"
             />
