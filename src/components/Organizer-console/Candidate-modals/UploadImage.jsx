@@ -24,8 +24,6 @@ const UploadImage = ({
       .catch((error) => {
         console.log(error.message);
       });
-
-    window.location.reload(false);
   };
 
   return (

@@ -19,7 +19,7 @@ const ViewCandidate = ({ candidateData, viewCandidate, setViewCandidate }) => {
         withCloseButton={false}
         size="lg"
       >
-        <div className="mb-4 w-3/4 mx-auto shadow-lg border border-gray-400 rounded-t-lg">
+        <div className="mb-4 w-full shadow-lg border border-gray-400 rounded-t-lg">
           <CandidateAvatar CandidateID={candidateData.id} />
         </div>
         <div className="mb-4 flex items-center">

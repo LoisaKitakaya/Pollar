@@ -1,7 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-
-import loader from "../../assets/Lazy-Loader/150x150.gif";
+import { Notification } from "@mantine/core";
 
 const REGISTER_ORGANIZER = gql`
   mutation RegisterOrganizer(
@@ -43,16 +42,17 @@ const RegisterOrganizer = () => {
   }
   if (loading)
     return (
-      <>
-        <div className="h-full w-full">
-          <div className="my-12">
-            <img src={loader} className="m-auto" alt="loader" />
-            <p className="text-center text-2xl my-8 text-gray-500 font-semibold">
-              Loading... Please wait
-            </p>
-          </div>
-        </div>
-      </>
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
     );
   if (error) return `Submission error! ${error.message}`;
 
