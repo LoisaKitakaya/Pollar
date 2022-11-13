@@ -1,30 +1,84 @@
-import { gql, useQuery } from "@apollo/client";
+import { useState, useEffect } from "react";
+import { Loader } from "@mantine/core";
 
-const CANDIDATE_AVATAR = gql`
-  query CandidateAvatar($id: String!) {
-    candidateAvatar(id: $id)
-  }
-`;
+import axios from "axios";
 
-const CandidateAvatar = ({ CandidateID }) => {
-  const { loading, error, data } = useQuery(CANDIDATE_AVATAR, {
-    variables: { id: CandidateID },
-  });
+const url = "http://127.0.0.1:8000/candidates/avatar/";
 
-  if (data) {
-    console.log(data);
-    console.log("Data fetched successfully.");
-  }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
+const CandidateAvatar = ({
+  CandidateID,
+  updated,
+  setUpdated,
+  isLoading,
+}) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (updated && isLoading) {
+      setLoading(true);
+
+      const params = {
+        id: CandidateID,
+      };
+
+      axios
+        .get(url, {
+          params: params,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          setData(response.data.image);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+
+          setUpdated(false);
+        });
+    }
+
+    setLoading(true);
+
+    const params = {
+      id: CandidateID,
+    };
+
+    axios
+      .get(url, {
+        params: params,
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        setData(response.data.image);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+      .finally(() => setLoading(false));
+  }, [CandidateID, updated, setUpdated, isLoading]);
 
   return (
     <div>
-      <img
-        className="w-full h-60 rounded-t-lg"
-        src={data.candidateAvatar}
-        alt="candidate avatar"
-      />
+      {loading ? (
+        <>
+          <div className="w-full h-60 py-28 rounded-t-lg">
+            <Loader className="mx-auto" />
+          </div>
+        </>
+      ) : (
+        <>
+          <img
+            className="w-full h-60 rounded-t-lg"
+            src={data}
+            alt="candidate avatar"
+          />
+        </>
+      )}
     </div>
   );
 };
