@@ -10,7 +10,7 @@ import { useState } from "react";
 
 import UpdateProfile from "../Organizer-console/Profile-modals/UpdateProfile";
 
-const OrganizerSettings = () => {
+const OrganizerSettings = ({ organizerID }) => {
   const [opened, setOpened] = useState(false);
 
   const navigate = useNavigate();
@@ -88,7 +88,11 @@ const OrganizerSettings = () => {
       </Menu>
 
       {/* update profile modal */}
-      <UpdateProfile opened={opened} setOpened={setOpened} />
+      <UpdateProfile
+        opened={opened}
+        setOpened={setOpened}
+        organizerID={organizerID}
+      />
       {/* update profile modal */}
     </div>
   );

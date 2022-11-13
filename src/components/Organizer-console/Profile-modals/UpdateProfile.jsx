@@ -36,7 +36,7 @@ const UPDATE_ORGANIZER = gql`
   }
 `;
 
-const UpdateProfile = ({ opened, setOpened }) => {
+const UpdateProfile = ({ opened, setOpened, organizerID }) => {
   const theme = useMantineTheme();
 
   const [updateOrganizer, { data, loading, error }] =

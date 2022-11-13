@@ -1,48 +1,20 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { gql, useQuery } from "@apollo/client";
 import axios from "axios";
 
-const MY_ACCOUNT = gql`
-  query MyAccount {
-    myOrganizerAccount {
-      id
-      user {
-        id
-        username
-        firstName
-        lastName
-        email
-      }
-      phone
-      country
-      paidStatus
-      runningPackage
-      workspaceSet {
-        name
-        voterLimit
-        pollLimit
-      }
-    }
-  }
-`;
+const url = "http://127.0.0.1:8000/organizers/avatar/";
 
-const url = "http://127.0.0.1:8000/organizers/upload_avatar/";
-
-const UploadAvatar = ({ opened, setOpened }) => {
+const UploadAvatar = ({
+  opened,
+  setOpened,
+  organizerID,
+  setIsLoading,
+  setUpdated,
+}) => {
   const theme = useMantineTheme();
 
-  const { loading, error, data } = useQuery(MY_ACCOUNT);
-
-  if (data) {
-    console.log(data);
-    console.log("Data fetched successfully.");
-  }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
-
-  const organizerData = data.myOrganizerAccount;
-
   const handleSubmit = (data) => {
+    setIsLoading(true);
+
     axios
       .post(url, data, {
         headers: {
@@ -54,9 +26,12 @@ const UploadAvatar = ({ opened, setOpened }) => {
       })
       .catch((error) => {
         console.log(error.message);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
 
-    window.location.reload(false);
+        setUpdated(true);
+      });
   };
 
   return (
@@ -81,11 +56,13 @@ const UploadAvatar = ({ opened, setOpened }) => {
           e.preventDefault();
 
           const data = {
-            id: organizerData.id,
+            id: organizerID,
             image: e.target.image.files[0],
           };
 
           handleSubmit(data);
+
+          setOpened(false);
         }}
       >
         <input
