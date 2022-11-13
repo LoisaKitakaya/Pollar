@@ -2,16 +2,20 @@ import { Modal, useMantineTheme } from "@mantine/core";
 
 import axios from "axios";
 
-const url = "http://127.0.0.1:8000/candidates/upload_avatar/";
+const url = "http://127.0.0.1:8000/candidates/avatar/";
 
 const UploadImage = ({
   candidateData,
   uploadCandidate,
   setUploadCandidate,
+  setUpdated,
+  setIsLoading,
 }) => {
   const theme = useMantineTheme();
 
   const handleSubmit = (data) => {
+    setIsLoading(true);
+
     axios
       .post(url, data, {
         headers: {
@@ -23,6 +27,11 @@ const UploadImage = ({
       })
       .catch((error) => {
         console.log(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+
+        setUpdated(true);
       });
   };
 

@@ -37,6 +37,8 @@ const OrganizerCandidates = () => {
   const [viewCandidate, setViewCandidate] = useState(false);
   const [editCandidateModal, setEditCandidateModal] = useState(false);
   const [uploadCandidate, setUploadCandidate] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [candidateData, setCandidateData] = useState({});
 
@@ -86,7 +88,12 @@ const OrganizerCandidates = () => {
                       setViewCandidate(true);
                     }}
                   >
-                    <CandidateAvatar CandidateID={candidate.id} />
+                    <CandidateAvatar
+                      CandidateID={candidate.id}
+                      updated={updated}
+                      setUpdated={setUpdated}
+                      isLoading={isLoading}
+                    />
                     <div className="m-1 p-2 flex justify-between">
                       <p className="text-lg">
                         {candidate.firstName} {candidate.lastName}
@@ -168,6 +175,8 @@ const OrganizerCandidates = () => {
         candidateData={candidateData}
         uploadCandidate={uploadCandidate}
         setUploadCandidate={setUploadCandidate}
+        setUpdated={setUpdated}
+        setIsLoading={setIsLoading}
       />
       {/* upload candidate avatar modal */}
 
