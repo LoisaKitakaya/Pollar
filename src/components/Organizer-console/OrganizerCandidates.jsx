@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { Menu } from "@mantine/core";
-import { IconEdit, IconTrash } from "@tabler/icons";
+import { IconEdit, IconPhoto } from "@tabler/icons";
 import { useState } from "react";
 
 import CandidateAvatar from "./Candidate-modals/CandidateAvatar";
@@ -8,6 +8,7 @@ import DeleteCandidate from "./Candidate-modals/DeleteCandidate";
 import EditCandidate from "./Candidate-modals/EditCandidate";
 import ViewCandidate from "./Candidate-modals/ViewCandidate";
 import loader from "../../assets/Loading-Image/256x256.gif";
+import UploadImage from "./Candidate-modals/UploadImage";
 
 const GET_MY_CANDIDATES = gql`
   query GetMyCandidates {
@@ -34,7 +35,8 @@ const GET_MY_CANDIDATES = gql`
 
 const OrganizerCandidates = () => {
   const [viewCandidate, setViewCandidate] = useState(false);
-  const [editCandidate, setEditCandidate] = useState(false);
+  const [editCandidateModal, setEditCandidateModal] = useState(false);
+  const [uploadCandidate, setUploadCandidate] = useState(false);
 
   const [candidateData, setCandidateData] = useState({});
 
@@ -44,15 +46,16 @@ const OrganizerCandidates = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return (
-    <>
-      <div className="h-full w-full">
-        <div className="my-20">
-          <img src={loader} className="mx-auto my-36" alt="loader" />
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-20">
+            <img src={loader} className="mx-auto my-36" alt="loader" />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
@@ -88,49 +91,58 @@ const OrganizerCandidates = () => {
                       <p className="text-lg">
                         {candidate.firstName} {candidate.lastName}
                       </p>
-                      <Menu
-                        shadow="md"
-                        width={100}
-                        position="top"
-                        offset={-5}
-                        trigger="hover"
-                        openDelay={100}
-                        closeDelay={400}
-                      >
-                        <Menu.Target>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                            />
-                          </svg>
-                        </Menu.Target>
+                      <div className="flex items-center">
+                        <Menu
+                          shadow="md"
+                          width={150}
+                          position="top"
+                          offset={20}
+                          trigger="hover"
+                          openDelay={100}
+                          closeDelay={400}
+                        >
+                          <Menu.Target>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-6 h-5"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                              />
+                            </svg>
+                          </Menu.Target>
 
-                        <Menu.Dropdown>
-                          <Menu.Item
-                            icon={<IconEdit size={14} />}
-                            onClick={() => {
-                              setCandidateData(candidate);
+                          <Menu.Dropdown>
+                            <Menu.Item
+                              icon={<IconEdit size={14} />}
+                              onClick={() => {
+                                setCandidateData(candidate);
 
-                              setEditCandidate(true);
-                            }}
-                          >
-                            Edit
-                          </Menu.Item>
-                          <Menu.Divider />
-                          <Menu.Item color="red" icon={<IconTrash size={14} />}>
-                            <DeleteCandidate candidateData={candidate} />
-                          </Menu.Item>
-                        </Menu.Dropdown>
-                      </Menu>
+                                setEditCandidateModal(true);
+                              }}
+                            >
+                              Edit details
+                            </Menu.Item>
+                            <Menu.Item
+                              icon={<IconPhoto size={14} />}
+                              onClick={() => {
+                                setCandidateData(candidate);
+
+                                setUploadCandidate(true);
+                              }}
+                            >
+                              Upload image
+                            </Menu.Item>
+                          </Menu.Dropdown>
+                        </Menu>
+                        <DeleteCandidate candidateData={candidate} />
+                      </div>
                     </div>
                   </div>
                 </>
@@ -151,11 +163,19 @@ const OrganizerCandidates = () => {
       />
       {/* view candidate modal */}
 
+      {/* upload candidate avatar modal */}
+      <UploadImage
+        candidateData={candidateData}
+        uploadCandidate={uploadCandidate}
+        setUploadCandidate={setUploadCandidate}
+      />
+      {/* upload candidate avatar modal */}
+
       {/* edit candidate modal */}
       <EditCandidate
         candidateData={candidateData}
-        editCandidate={editCandidate}
-        setEditCandidate={setEditCandidate}
+        editCandidateModal={editCandidateModal}
+        setEditCandidateModal={setEditCandidateModal}
       />
       {/* edit candidate modal */}
     </div>

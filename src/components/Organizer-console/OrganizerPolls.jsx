@@ -92,7 +92,7 @@ const OrganizerPolls = () => {
                       <Tooltip label="view poll" color="dark" withArrow>
                         <ThemeIcon
                           variant="fill"
-                          color="blue"
+                          color="indigo"
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
