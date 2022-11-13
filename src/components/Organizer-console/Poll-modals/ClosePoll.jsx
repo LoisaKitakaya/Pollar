@@ -30,7 +30,7 @@ const GET_MY_POLLS = gql`
   }
 `;
 
-const ClosePoll = ({ PollID, closeState, setCloseState }) => {
+const ClosePoll = ({ PollID }) => {
   const [closePoll, { data, loading, error }] = useMutation(CLOSE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -60,7 +60,7 @@ const ClosePoll = ({ PollID, closeState, setCloseState }) => {
     <div>
       <Tooltip label="close poll" color="dark" withArrow>
         <ThemeIcon
-          variant={closeState}
+          variant="fill"
           color="orange"
           radius="md"
           size="lg"
@@ -72,8 +72,6 @@ const ClosePoll = ({ PollID, closeState, setCloseState }) => {
               },
             })
           }
-          onMouseEnter={() => setCloseState("fill")}
-          onMouseLeave={() => setCloseState("outline")}
         >
           <IconLockAccess />
         </ThemeIcon>
