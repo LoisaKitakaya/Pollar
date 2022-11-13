@@ -1,6 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
 import { Notification } from "@mantine/core";
+// import { IconCheck } from "@tabler/icons";
 
 const REGISTER_CANDIDATE = gql`
   mutation AddCandidate(
@@ -57,6 +58,29 @@ const GET_MY_POLLS = gql`
   }
 `;
 
+const GET_MY_CANDIDATES = gql`
+  query GetMyCandidates {
+    organizerCandidates {
+      id
+      firstName
+      lastName
+      email
+      country
+      bio
+      poll {
+        seat
+        beginDate
+        endDate
+        workspace {
+          name
+          voterLimit
+          pollLimit
+        }
+      }
+    }
+  }
+`;
+
 const RegisterCandidate = ({
   registerCandidateView,
   setRegisterCandidateView,
@@ -67,28 +91,50 @@ const RegisterCandidate = ({
   const [registerCandidate, { data, loading, error }] = useMutation(
     REGISTER_CANDIDATE,
     {
-      refetchQueries: [
-        { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
-      ],
+      refetchQueries: [{ query: GET_MY_POLLS }, { query: GET_MY_CANDIDATES }],
     }
   );
 
   if (data) {
     console.log(data);
-    console.log("Account creation success.You can now log in.");
   }
-  if (loading) return (
-    <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-      <Notification
-        loading
-        color="green"
-        disallowClose
-        className="w-fit bg-zinc-300 rounded-md"
-      >
-        <span className="text-black text-xl">Loading... Please wait</span>
-      </Notification>
-    </div>
-  );
+  // return (
+  //   <div
+  //     id="success-prompt"
+  //     className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md"
+  //   >
+  //     <Notification
+  //       icon={<IconCheck size={20} />}
+  //       color="green"
+  //       radius="md"
+  //       className="w-fit bg-zinc-300 rounded-md"
+  //       closeButtonProps={{ color: "red" }}
+  //       onClose={() => {
+  //         var elem = document.getElementById("success-prompt");
+  //         elem.parentNode.removeChild(elem);
+  //         return false;
+  //       }}
+  //     >
+  //       <span className="text-black text-xl">
+  //         Candidate registered successfully
+  //       </span>
+  //     </Notification>
+  //   </div>
+  // );
+  if (loading)
+    return (
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (

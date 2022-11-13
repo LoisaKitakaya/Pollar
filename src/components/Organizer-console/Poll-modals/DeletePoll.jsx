@@ -30,7 +30,7 @@ const GET_MY_POLLS = gql`
   }
 `;
 
-const DeletePoll = ({ PollID, deleteState, setDeleteState }) => {
+const DeletePoll = ({ PollID }) => {
   const [deletePoll, { data, loading, error }] = useMutation(DELETE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -49,6 +49,7 @@ const DeletePoll = ({ PollID, deleteState, setDeleteState }) => {
           color="green"
           disallowClose
           className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
         >
           <span className="text-black text-xl">Loading... Please wait</span>
         </Notification>
@@ -60,7 +61,7 @@ const DeletePoll = ({ PollID, deleteState, setDeleteState }) => {
     <div>
       <Tooltip label="delete poll" color="dark" withArrow>
         <ThemeIcon
-          variant={deleteState}
+          variant="fill"
           color="red"
           radius="md"
           size="lg"
@@ -72,8 +73,6 @@ const DeletePoll = ({ PollID, deleteState, setDeleteState }) => {
               },
             })
           }
-          onMouseEnter={() => setDeleteState("fill")}
-          onMouseLeave={() => setDeleteState("outline")}
         >
           <IconTrash />
         </ThemeIcon>

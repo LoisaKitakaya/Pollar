@@ -40,12 +40,6 @@ const OrganizerPolls = () => {
   const [pollData, setPollData] = useState({});
   const [allPolls, setAllPolls] = useState([]);
 
-  const [viewState, setViewState] = useState("outline");
-  const [editState, setEditState] = useState("outline");
-  const [resultsState, setResultsState] = useState("outline");
-  const [closeState, setCloseState] = useState("outline");
-  const [deleteState, setDeleteState] = useState("outline");
-
   const { loading, error, data } = useQuery(GET_MY_POLLS);
 
   if (data) {
@@ -97,8 +91,8 @@ const OrganizerPolls = () => {
                     <div className="flex items-center">
                       <Tooltip label="view poll" color="dark" withArrow>
                         <ThemeIcon
-                          variant={viewState}
-                          color="blue"
+                          variant="fill"
+                          color="indigo"
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
@@ -107,15 +101,13 @@ const OrganizerPolls = () => {
 
                             setOpenedView(true);
                           }}
-                          onMouseEnter={() => setViewState("fill")}
-                          onMouseLeave={() => setViewState("outline")}
                         >
                           <IconEye />
                         </ThemeIcon>
                       </Tooltip>
                       <Tooltip label="edit poll" color="dark" withArrow>
                         <ThemeIcon
-                          variant={editState}
+                          variant="fill"
                           color="blue"
                           radius="md"
                           size="lg"
@@ -125,41 +117,25 @@ const OrganizerPolls = () => {
 
                             setOpenedEdit(true);
                           }}
-                          onMouseEnter={() => setEditState("fill")}
-                          onMouseLeave={() => setEditState("outline")}
                         >
                           <IconEdit />
                         </ThemeIcon>
                       </Tooltip>
                       <Tooltip label="view results" color="dark" withArrow>
                         <ThemeIcon
-                          variant={resultsState}
+                          variant="fill"
                           color="green"
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
-                          onMouseEnter={() => setResultsState("fill")}
-                          onMouseLeave={() => setResultsState("outline")}
                         >
                           <Link to={`/app/results/${poll.id}`} target="_blank">
                             <IconFileAnalytics />
                           </Link>
                         </ThemeIcon>
                       </Tooltip>
-                      {poll.open ? (
-                        <ClosePoll
-                          PollID={poll.id}
-                          closeState={closeState}
-                          setCloseState={setCloseState}
-                        />
-                      ) : (
-                        <div></div>
-                      )}
-                      <DeletePoll
-                        PollID={poll.id}
-                        deleteState={deleteState}
-                        setDeleteState={setDeleteState}
-                      />
+                      {poll.open ? <ClosePoll PollID={poll.id} /> : <div></div>}
+                      <DeletePoll PollID={poll.id} />
                       {poll.open ? (
                         <span className="mx-1 py-1 px-2 bg-emerald-300 rounded-md">
                           Status: Open

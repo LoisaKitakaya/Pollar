@@ -79,6 +79,7 @@ const EditPoll = ({ openedEdit, setOpenedEdit, pollData }) => {
         color="green"
         disallowClose
         className="w-fit bg-zinc-300 rounded-md"
+        radius="md"
       >
         <span className="text-black text-xl">Loading... Please wait</span>
       </Notification>
