@@ -1,5 +1,6 @@
 import { HoverCard } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import LogOut from "./Accounts/LogOut";
 import FeaturesContainer from "./Navbar/FeaturesContainer";
@@ -16,7 +17,7 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between px-16 py-1 shadow-lg bg-slate-100">
-      <a href="/" className="flex items-center">
+      <Link to="/" className="flex items-center">
         <img
           className="w-14"
           src="https://res.cloudinary.com/dit0fii18/image/upload/v1665759533/documents/logos/logo_pollar_bird_resize_zfvonv.png"
@@ -25,7 +26,7 @@ const Navbar = () => {
         <h1 className="text-3xl ml-2 header-font text-yellow-900 font-semibold pt-1">
           Pollar
         </h1>
-      </a>
+      </Link>
 
       <div className="flex items-center">
         <HoverCard width={500} position="bottom" withArrow shadow="md">
@@ -57,12 +58,12 @@ const Navbar = () => {
             {/* features container */}
           </HoverCard.Dropdown>
         </HoverCard>
-        <a href="/" className="text-lg mx-4 hover:text-blue-900">
+        <Link to="/" className="text-lg mx-4 hover:text-blue-900">
           Pricing
-        </a>
-        <a href="/" className="text-lg mx-4 hover:text-blue-900">
+        </Link>
+        <Link to="/" className="text-lg mx-4 hover:text-blue-900">
           What's New
-        </a>
+        </Link>
         <HoverCard width={250} position="bottom" withArrow shadow="md">
           <HoverCard.Target>
             <p className="text-lg mx-4 hover:cursor-pointer hover:text-blue-900">
@@ -97,12 +98,12 @@ const Navbar = () => {
       <div className="flex items-center">
         {status ? (
           <>
-            <a
-              href="/intersection/"
+            <Link
+              to="/intersection/"
               className="rounded-md px-3 py-2 bg-gray-500 mt-0 ml-4 hover:bg-gray-600 shadow-md border-black text-white"
             >
               Console
-            </a>
+            </Link>
             <LogOut />
           </>
         ) : (

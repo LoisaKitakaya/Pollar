@@ -19,6 +19,7 @@ import loader from "../../assets/Loading-Image/256x256.gif";
 const CHECK_MY_ACCOUNT = gql`
   query organizerCheck {
     myOrganizerAccount {
+      id
       user {
         firstName
         lastName
@@ -42,21 +43,26 @@ const OrganizerConsole = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return (
-    <>
-      <div className="h-full w-full">
-        <div className="my-52">
-          <img src={loader} className="m-auto" alt="loader" />
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-52">
+            <img src={loader} className="m-auto" alt="loader" />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
     <div>
       {/* controls */}
-      <Controls opened={opened} setOpened={setOpened} />
+      <Controls
+        opened={opened}
+        setOpened={setOpened}
+        organizerID={data.myOrganizerAccount.id}
+      />
       {/* controls */}
 
       <Tabs
@@ -129,6 +135,7 @@ const OrganizerConsole = () => {
           <OrganizerProfile />
         </Tabs.Panel>
       </Tabs>
+      {console.log(`organizer id is ${data.myOrganizerAccount.id}`)}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Tooltip } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -22,8 +23,8 @@ const Intersection = () => {
               color="violet"
               withArrow
             >
-              <a
-                href="/auth/accounts/"
+              <Link
+                to="/auth/accounts/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
@@ -45,13 +46,13 @@ const Intersection = () => {
                 <h1 className="text-center text-4xl py-6 px-4">
                   I am new to Pollar
                 </h1>
-              </a>
+              </Link>
             </Tooltip>
           </div>
           <div className="w-1-4 h-1-4 m-2 rounded-md drop-shadow-lg hover:drop-shadow-xl border border-gray-400 hover:border-gray-900 bg-zinc-200 hover:bg-zinc-400">
             <Tooltip label="I have a voter account" color="teal" withArrow>
-              <a
-                href="/app/voter_console/"
+              <Link
+                to="/app/voter_console/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
@@ -73,13 +74,13 @@ const Intersection = () => {
                 <h1 className="text-center text-4xl py-6 px-4">
                   Voter console
                 </h1>
-              </a>
+              </Link>
             </Tooltip>
           </div>
           <div className="w-1-4 h-1-4 m-2 rounded-md drop-shadow-lg hover:drop-shadow-xl border border-gray-400 hover:border-gray-900 bg-zinc-200 hover:bg-zinc-400">
             <Tooltip label="I have an organizer account" color="teal" withArrow>
-              <a
-                href="/app/organizer_console/"
+              <Link
+                to="/app/organizer_console/"
                 className="text-gray-600 hover:text-gray-900 flex items-center"
               >
                 <span className="ml-4">
@@ -101,7 +102,7 @@ const Intersection = () => {
                 <h1 className="text-center text-4xl py-6 px-4">
                   Organizer console
                 </h1>
-              </a>
+              </Link>
             </Tooltip>
           </div>
         </div>
