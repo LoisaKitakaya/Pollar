@@ -1,15 +1,11 @@
 import { Menu, Text, Kbd } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import {
-  IconEdit,
-  IconSearch,
-  IconTransferOut,
-} from "@tabler/icons";
+import { IconEdit, IconSearch, IconTransferOut } from "@tabler/icons";
 import { useState } from "react";
 
 import ProfileUpdate from "../Voter-console/Profile-modals/ProfileUpdate";
 
-const VoterSettings = () => {
+const VoterSettings = ({ voterID }) => {
   const [opened, setOpened] = useState(false);
 
   const navigate = useNavigate();
@@ -20,8 +16,6 @@ const VoterSettings = () => {
     localStorage.removeItem("authenticated");
 
     navigate("/");
-
-    window.location.reload(false);
   };
 
   return (

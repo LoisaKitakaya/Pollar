@@ -42,15 +42,16 @@ const VoterPolls = ({ organizerID }) => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return (
-    <>
-      <div className="h-full w-full">
-        <div className="my-20">
-          <img src={loader} className="mx-auto my-36" alt="loader" />
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-20">
+            <img src={loader} className="mx-auto my-36" alt="loader" />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   return (
@@ -84,8 +85,8 @@ const VoterPolls = ({ organizerID }) => {
                     <div className="flex items-center">
                       <Tooltip label="view poll" color="dark" withArrow>
                         <ThemeIcon
-                          variant="outline"
-                          color="blue"
+                          variant="fill"
+                          color="indigo"
                           radius="md"
                           size="lg"
                           className="cursor-pointer mx-1"
@@ -102,8 +103,8 @@ const VoterPolls = ({ organizerID }) => {
                       {poll.open ? (
                         <Tooltip label="vote on poll" color="dark" withArrow>
                           <ThemeIcon
-                            variant="outline"
-                            color="yellow"
+                            variant="fill"
+                            color="orange"
                             radius="md"
                             size="lg"
                             className="cursor-pointer mx-1"
@@ -121,7 +122,7 @@ const VoterPolls = ({ organizerID }) => {
                       )}
                       <Tooltip label="view results" color="dark" withArrow>
                         <ThemeIcon
-                          variant="outline"
+                          variant="fill"
                           color="green"
                           radius="md"
                           size="lg"
