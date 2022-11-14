@@ -86,11 +86,7 @@ const OrganizerSettings = ({ organizerID }) => {
       </Menu>
 
       {/* update profile modal */}
-      <UpdateProfile
-        opened={opened}
-        setOpened={setOpened}
-        organizerID={organizerID}
-      />
+      <UpdateProfile opened={opened} setOpened={setOpened} />
       {/* update profile modal */}
     </div>
   );

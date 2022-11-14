@@ -1,40 +1,21 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { gql, useQuery } from "@apollo/client";
+
 import axios from "axios";
 
-const MY_ACCOUNT = gql`
-  query MyAccount {
-    myVoterAccount {
-      id
-      user {
-        id
-        username
-        firstName
-        lastName
-        email
-      }
-      country
-    }
-  }
-`;
+const url = "http://127.0.0.1:8000/voters/avatar/";
 
-const url = "http://127.0.0.1:8000/voters/upload_avatar/";
-
-const AvatarUpload = ({ opened, setOpened }) => {
+const AvatarUpload = ({
+  opened,
+  setOpened,
+  voterID,
+  setIsLoading,
+  setUpdated,
+}) => {
   const theme = useMantineTheme();
 
-  const { loading, error, data } = useQuery(MY_ACCOUNT);
-
-  if (data) {
-    console.log(data);
-    console.log("Data fetched successfully.");
-  }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
-
-  const voterData = data.myVoterAccount;
-
   const handleSubmit = (data) => {
+    setIsLoading(true);
+
     axios
       .post(url, data, {
         headers: {
@@ -46,9 +27,12 @@ const AvatarUpload = ({ opened, setOpened }) => {
       })
       .catch((error) => {
         console.log(error.message);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
 
-    window.location.reload(false);
+        setUpdated(true);
+      });
   };
 
   return (
@@ -73,11 +57,13 @@ const AvatarUpload = ({ opened, setOpened }) => {
           e.preventDefault();
 
           const data = {
-            id: voterData.id,
+            id: voterID,
             image: e.target.image.files[0],
           };
 
           handleSubmit(data);
+
+          setOpened(false);
         }}
       >
         <input

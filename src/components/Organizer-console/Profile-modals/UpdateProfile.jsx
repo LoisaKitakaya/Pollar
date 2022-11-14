@@ -56,7 +56,7 @@ const MY_ACCOUNT = gql`
   }
 `;
 
-const UpdateProfile = ({ opened, setOpened, organizerID }) => {
+const UpdateProfile = ({ opened, setOpened }) => {
   const theme = useMantineTheme();
 
   const [updateOrganizer, { data, loading, error }] = useMutation(
