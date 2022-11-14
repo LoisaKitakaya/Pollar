@@ -1,6 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { Notification } from "@mantine/core";
 
 const UPDATE_VOTER = gql`
   mutation UpdateVoter(
@@ -28,20 +29,72 @@ const UPDATE_VOTER = gql`
   }
 `;
 
+const MY_ACCOUNT = gql`
+  query MyAccount {
+    myVoterAccount {
+      id
+      user {
+        username
+        firstName
+        lastName
+        email
+      }
+      country
+      workspace {
+        id
+        name
+        organizer {
+          id
+          phone
+          user {
+            username
+            firstName
+            lastName
+            email
+          }
+        }
+      }
+    }
+  }
+`;
+
 const ProfileUpdate = ({ opened, setOpened }) => {
   const theme = useMantineTheme();
 
-  const [updateVoter, { data, loading, error }] = useMutation(UPDATE_VOTER);
+  const [updateVoter, { data, loading, error }] = useMutation(UPDATE_VOTER, {
+    refetchQueries: [{ query: MY_ACCOUNT }],
+  });
 
   const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("authenticated");
+
+    navigate("/auth/signin/");
+  };
 
   if (data) {
     console.log(data);
     console.log("Account registration success. Redirecting to console.");
 
-    navigate("/app/organizer_console/");
+    logOut();
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   return (
@@ -64,6 +117,8 @@ const ProfileUpdate = ({ opened, setOpened }) => {
           className="px-4"
           onSubmit={(e) => {
             e.preventDefault();
+
+            alert("Login again to have the changes take effect");
 
             updateVoter({
               variables: {
