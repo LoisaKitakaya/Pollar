@@ -1,6 +1,5 @@
-import { Modal, useMantineTheme } from "@mantine/core";
+import { Modal, useMantineTheme, Notification } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
-import { Notification } from "@mantine/core";
 
 const CREATE_POLL = gql`
   mutation CreatePoll(

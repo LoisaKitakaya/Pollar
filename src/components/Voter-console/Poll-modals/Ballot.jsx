@@ -1,4 +1,4 @@
-import { Modal, useMantineTheme } from "@mantine/core";
+import { Modal, useMantineTheme, Notification } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
 
 const CAST_VOTE = gql`
@@ -35,10 +35,21 @@ const Ballot = ({ openedBallot, setOpenedBallot, pollData }) => {
   if (data) {
     console.log(data);
     console.log("Account creation success.You can now log in.");
-
-    window.location.reload(false);
   }
-  if (loading) return "Submitting...";
+  if (loading)
+    return (
+      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
+        <Notification
+          loading
+          color="green"
+          disallowClose
+          className="w-fit bg-zinc-300 rounded-md"
+          radius="md"
+        >
+          <span className="text-black text-xl">Loading... Please wait</span>
+        </Notification>
+      </div>
+    );
   if (error) return `Submission error! ${error.message}`;
 
   let candidates = pollData.candidateSet;
