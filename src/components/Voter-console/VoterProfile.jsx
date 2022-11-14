@@ -40,15 +40,16 @@ const VoterProfile = () => {
     console.log(data);
     console.log("Data fetched successfully.");
   }
-  if (loading) return (
-    <>
-      <div className="h-full w-full">
-        <div className="my-20">
-          <img src={loader} className="mx-auto my-36" alt="loader" />
+  if (loading)
+    return (
+      <>
+        <div className="h-full w-full">
+          <div className="my-20">
+            <img src={loader} className="mx-auto my-36" alt="loader" />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   if (error) return `Fetching error! ${error.message}`;
 
   const voterData = data.myVoterAccount;
@@ -59,9 +60,7 @@ const VoterProfile = () => {
       {/* body */}
       <div className="h-full py-4 px-20">
         <div className="p-2 flex justify-between mb-4">
-          <div className="rounded-md border w-2/4 shadow-md h-full my-4">
-            <VoterImage />
-          </div>
+          <VoterImage voterID={data.myVoterAccount.id} />
           <div className="py-4 px-8">
             <div className="mb-4">
               <p className="font-light text-lg text-gray-600 mb-2">Username</p>
@@ -110,9 +109,7 @@ const VoterProfile = () => {
           Your workspace organizer's details
         </h3>
         <div className="p-2 flex justify-between mb-4">
-          <div className="rounded-md border w-2/4 shadow-md h-full my-4">
-            <VoterOrganizerImage organizerID={workspaceData.organizer.id} />
-          </div>
+          <VoterOrganizerImage organizerID={workspaceData.organizer.id} />
           <div className="py-4 px-4">
             <div className="mb-4">
               <p className="font-light text-lg text-gray-600 mb-2">Username</p>
