@@ -85,7 +85,7 @@ const DeleteCandidate = ({ candidateData }) => {
           color="red"
           radius="sm"
           size="sm"
-          className="cursor-pointer z-50"
+          className="cursor-pointer flex items-center z-50"
           onClick={() =>
             deleteCandidate({
               variables: {
