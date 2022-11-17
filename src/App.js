@@ -8,6 +8,7 @@ import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import Home from "./pages/site/Home";
 import Intersection from "./pages/site/Intersection";
+import Pricing from "./pages/site/Pricing";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Route path="/app/organizer_console/" element={<OrganizerConsole />} />
       <Route path="/app/voter_console/" element={<VoterConsole />} />
       <Route path="/app/results/:id" element={<Results />} />
+      <Route path="/pricing" element={<Pricing />} />
     </Routes>
   );
 };
