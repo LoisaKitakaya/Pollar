@@ -1,7 +1,9 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
-import { Notification } from "@mantine/core";
-// import { IconCheck } from "@tabler/icons";
+import { ToastContainer, toast } from "react-toastify";
+import { useRef } from "react";
+
+import loader from "../../../assets/Lazy-Loader/loading.svg";
 
 const REGISTER_CANDIDATE = gql`
   mutation AddCandidate(
@@ -88,6 +90,25 @@ const RegisterCandidate = ({
 }) => {
   const theme = useMantineTheme();
 
+  const toastElem = useRef(null);
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
+
+  const notifyloading = () =>
+    (toastElem.current = toast.info("Loading... Please wait", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-loading",
+      className: "bg-info",
+      autoClose: false,
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
+    }));
+
   const [registerCandidate, { data, loading, error }] = useMutation(
     REGISTER_CANDIDATE,
     {
@@ -98,44 +119,12 @@ const RegisterCandidate = ({
   if (data) {
     console.log(data);
   }
-  // return (
-  //   <div
-  //     id="success-prompt"
-  //     className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md"
-  //   >
-  //     <Notification
-  //       icon={<IconCheck size={20} />}
-  //       color="green"
-  //       radius="md"
-  //       className="w-fit bg-zinc-300 rounded-md"
-  //       closeButtonProps={{ color: "red" }}
-  //       onClose={() => {
-  //         var elem = document.getElementById("success-prompt");
-  //         elem.parentNode.removeChild(elem);
-  //         return false;
-  //       }}
-  //     >
-  //       <span className="text-black text-xl">
-  //         Candidate registered successfully
-  //       </span>
-  //     </Notification>
-  //   </div>
-  // );
-  if (loading)
-    return (
-      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-        <Notification
-          loading
-          color="green"
-          disallowClose
-          className="w-fit bg-zinc-300 rounded-md"
-          radius="md"
-        >
-          <span className="text-black text-xl">Loading... Please wait</span>
-        </Notification>
-      </div>
-    );
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) {
+    notifyloading();
+  } else {
+    toast.dismiss(toastElem.current);
+  }
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -271,6 +260,10 @@ const RegisterCandidate = ({
           </button>
         </form>
       </Modal>
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

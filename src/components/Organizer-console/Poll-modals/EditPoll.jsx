@@ -1,6 +1,9 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
-import { Notification } from "@mantine/core";
+import { ToastContainer, toast } from "react-toastify";
+import { useRef } from "react";
+
+import loader from "../../../assets/Lazy-Loader/loading.svg";
 
 const UPDATE_POLL = gql`
   mutation UpdatePoll(
@@ -62,6 +65,25 @@ const GET_MY_POLLS = gql`
 const EditPoll = ({ openedEdit, setOpenedEdit, pollData }) => {
   const theme = useMantineTheme();
 
+  const toastElem = useRef(null);
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
+
+  const notifyloading = () =>
+    (toastElem.current = toast.info("Loading... Please wait", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-loading",
+      className: "bg-info",
+      autoClose: false,
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
+    }));
+
   const [updatePoll, { data, loading, error }] = useMutation(UPDATE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -70,22 +92,13 @@ const EditPoll = ({ openedEdit, setOpenedEdit, pollData }) => {
 
   if (data) {
     console.log(data);
-    console.log("Account creation success.You can now log in.");
   }
-  if (loading) return (
-    <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-      <Notification
-        loading
-        color="green"
-        disallowClose
-        className="w-fit bg-zinc-300 rounded-md"
-        radius="md"
-      >
-        <span className="text-black text-xl">Loading... Please wait</span>
-      </Notification>
-    </div>
-  );
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) {
+    notifyloading();
+  } else {
+    toast.dismiss(toastElem.current);
+  }
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -180,6 +193,10 @@ const EditPoll = ({ openedEdit, setOpenedEdit, pollData }) => {
           </button>
         </form>
       </Modal>
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

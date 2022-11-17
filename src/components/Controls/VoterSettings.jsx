@@ -16,6 +16,8 @@ const VoterSettings = ({ voterID }) => {
     localStorage.removeItem("authenticated");
 
     navigate("/");
+
+    window.location.reload();
   };
 
   return (

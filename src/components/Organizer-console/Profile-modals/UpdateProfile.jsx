@@ -1,7 +1,10 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
-import { Notification } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { useRef } from "react";
+
+import loader from "../../../assets/Lazy-Loader/loading.svg";
 
 const UPDATE_ORGANIZER = gql`
   mutation UpdateOrganizer(
@@ -59,6 +62,25 @@ const MY_ACCOUNT = gql`
 const UpdateProfile = ({ opened, setOpened }) => {
   const theme = useMantineTheme();
 
+  const toastElem = useRef(null);
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
+
+  const notifyloading = () =>
+    (toastElem.current = toast.info("Loading... Please wait", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-loading",
+      className: "bg-info",
+      autoClose: false,
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
+    }));
+
   const [updateOrganizer, { data, loading, error }] = useMutation(
     UPDATE_ORGANIZER,
     {
@@ -74,29 +96,21 @@ const UpdateProfile = ({ opened, setOpened }) => {
     localStorage.removeItem("authenticated");
     
     navigate("/auth/signin/");
+
+    window.location.reload();
   };
 
   if (data) {
     console.log(data);
-    console.log("Account registration success. Redirecting to console.");
 
     logOut();
   }
-  if (loading)
-    return (
-      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-        <Notification
-          loading
-          color="green"
-          disallowClose
-          className="w-fit bg-zinc-300 rounded-md"
-          radius="md"
-        >
-          <span className="text-black text-xl">Loading... Please wait</span>
-        </Notification>
-      </div>
-    );
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) {
+    notifyloading();
+  } else {
+    toast.dismiss(toastElem.current);
+  }
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -203,6 +217,10 @@ const UpdateProfile = ({ opened, setOpened }) => {
           </button>
         </form>
       </Modal>
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

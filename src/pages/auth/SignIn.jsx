@@ -34,7 +34,6 @@ const SignIn = () => {
     localStorage.setItem("authenticated", true);
 
     console.log(data);
-    console.log("Account logged in successfully.");
 
     navigate("/intersection/");
   }

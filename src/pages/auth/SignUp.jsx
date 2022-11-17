@@ -46,7 +46,7 @@ const SignUp = () => {
 
   if (data) {
     console.log(data);
-    console.log("Account creation success.You can now log in.");
+    
     navigate("/auth/signin/");
   }
   if (loading)

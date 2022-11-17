@@ -38,7 +38,6 @@ const VoterProfile = () => {
 
   if (data) {
     console.log(data);
-    console.log("Data fetched successfully.");
   }
   if (loading)
     return (
