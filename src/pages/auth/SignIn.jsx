@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -21,6 +22,14 @@ const SignIn = () => {
   PageTitle("Sign in");
 
   const navigate = useNavigate();
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
 
   const [tokenAuth, { data, loading, error }] = useMutation(TOKEN_AUTH);
 
@@ -47,7 +56,7 @@ const SignIn = () => {
         </div>
       </>
     );
-  if (error) return `Submission error! ${error.message}`;
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -111,6 +120,10 @@ const SignIn = () => {
       {/* footer */}
       <Footer />
       {/* footer */}
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };
