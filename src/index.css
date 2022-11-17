@@ -39,3 +39,23 @@ html::-webkit-scrollbar-thumb:hover {
 html::-webkit-scrollbar-thumb:active {
   background: rgb(68, 68, 68) !important;
 }
+
+:root {
+  --toastify-toast-width: fit-content !important;
+  --toastify-font-family: "Raleway", sans-serif !important;
+}
+
+.bg-error {
+  background-color: #fecaca !important;
+  color: black !important;
+}
+
+.bg-success {
+  background-color: #bbf7d0 !important;
+  color: black !important;
+}
+
+.bg-info {
+  background-color: #bfdbfe !important;
+  color: black !important;
+}

@@ -15,6 +15,7 @@ import {
 import App from './App';
 
 import './index.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const httpLink = createHttpLink({
   uri: "http://127.0.0.1:8000/graphql/",

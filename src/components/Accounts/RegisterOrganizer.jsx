@@ -1,6 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { Notification } from "@mantine/core";
+import { ToastContainer, toast } from "react-toastify";
+import { useRef } from "react";
+
+import loader from "../../assets/Lazy-Loader/loading.svg";
 
 const REGISTER_ORGANIZER = gql`
   mutation RegisterOrganizer(
@@ -18,7 +21,7 @@ const REGISTER_ORGANIZER = gql`
         }
         phone
         country
-        workspaceSet {
+        workspace {
           name
           pollLimit
           voterLimit
@@ -29,6 +32,25 @@ const REGISTER_ORGANIZER = gql`
 `;
 
 const RegisterOrganizer = () => {
+  const toastElem = useRef(null);
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
+
+  const notifyloading = () =>
+    (toastElem.current = toast.info("Loading... Please wait", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-loading",
+      className: "bg-info",
+      autoClose: false,
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
+    }));
+
   const [registerOrganizer, { data, loading, error }] =
     useMutation(REGISTER_ORGANIZER);
 
@@ -36,25 +58,15 @@ const RegisterOrganizer = () => {
 
   if (data) {
     console.log(data);
-    console.log("Account registration success. Redirecting to console.");
 
     navigate("/app/organizer_console/");
   }
-  if (loading)
-    return (
-      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-        <Notification
-          loading
-          color="green"
-          disallowClose
-          className="w-fit bg-zinc-300 rounded-md"
-          radius="md"
-        >
-          <span className="text-black text-xl">Loading... Please wait</span>
-        </Notification>
-      </div>
-    );
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) {
+    notifyloading();
+  } else {
+    toast.dismiss(toastElem.current);
+  }
+  if (error) notifyError(error);
 
   return (
     <div className="bg-zinc-100 rounded-lg shadow-md border p-4 w-3/4 m-auto">
@@ -155,6 +167,10 @@ const RegisterOrganizer = () => {
           Register
         </button>
       </form>
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

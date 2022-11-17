@@ -1,7 +1,10 @@
 import { Tooltip, ThemeIcon } from "@mantine/core";
 import { IconLockAccess } from "@tabler/icons";
 import { gql, useMutation } from "@apollo/client";
-import { Notification } from "@mantine/core";
+import { ToastContainer, toast } from "react-toastify";
+import { useRef } from "react";
+
+import loader from "../../../assets/Lazy-Loader/loading.svg";
 
 const CLOSE_POLL = gql`
   mutation ClosePoll($id: String!) {
@@ -31,6 +34,25 @@ const GET_MY_POLLS = gql`
 `;
 
 const ClosePoll = ({ PollID }) => {
+  const toastElem = useRef(null);
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
+
+  const notifyloading = () =>
+    (toastElem.current = toast.info("Loading... Please wait", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-loading",
+      className: "bg-info",
+      autoClose: false,
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
+    }));
+
   const [closePoll, { data, loading, error }] = useMutation(CLOSE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -39,23 +61,13 @@ const ClosePoll = ({ PollID }) => {
 
   if (data) {
     console.log(data);
-    console.log("This poll has been closed.");
   }
-  if (loading)
-    return (
-      <div className="fixed bottom-10 left-16 w-fit mx-auto shadow-md rounded-md">
-        <Notification
-          loading
-          color="green"
-          disallowClose
-          className="w-fit bg-zinc-300 rounded-md"
-          radius="md"
-        >
-          <span className="text-black text-xl">Loading... Please wait</span>
-        </Notification>
-      </div>
-    );
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) {
+    notifyloading();
+  } else {
+    toast.dismiss(toastElem.current);
+  }
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -77,6 +89,10 @@ const ClosePoll = ({ PollID }) => {
           <IconLockAccess />
         </ThemeIcon>
       </Tooltip>
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

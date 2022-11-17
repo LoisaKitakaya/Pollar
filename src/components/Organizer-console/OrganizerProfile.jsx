@@ -18,7 +18,7 @@ const MY_ACCOUNT = gql`
       country
       paidStatus
       runningPackage
-      workspaceSet {
+      workspace {
         name
         voterLimit
         pollLimit
@@ -32,7 +32,6 @@ const OrganizerProfile = () => {
 
   if (data) {
     console.log(data);
-    console.log("Data fetched successfully.");
   }
   if (loading)
     return (
@@ -47,7 +46,7 @@ const OrganizerProfile = () => {
   if (error) return `Fetching error! ${error.message}`;
 
   const organizerData = data.myOrganizerAccount;
-  const workspaceData = data.myOrganizerAccount.workspaceSet[0];
+  const workspaceData = data.myOrganizerAccount.workspace;
 
   return (
     <div>
