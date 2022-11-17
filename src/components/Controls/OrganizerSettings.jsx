@@ -21,6 +21,8 @@ const OrganizerSettings = ({ organizerID }) => {
     localStorage.removeItem("authenticated");
 
     navigate("/");
+
+    window.location.reload();
   };
 
   return (

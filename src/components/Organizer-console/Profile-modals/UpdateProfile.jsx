@@ -96,6 +96,8 @@ const UpdateProfile = ({ opened, setOpened }) => {
     localStorage.removeItem("authenticated");
     
     navigate("/auth/signin/");
+
+    window.location.reload();
   };
 
   if (data) {
