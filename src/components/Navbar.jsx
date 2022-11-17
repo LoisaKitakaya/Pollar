@@ -58,7 +58,7 @@ const Navbar = () => {
             {/* features container */}
           </HoverCard.Dropdown>
         </HoverCard>
-        <Link to="/" className="text-lg mx-4 hover:text-blue-900">
+        <Link to="/pricing" className="text-lg mx-4 hover:text-blue-900">
           Pricing
         </Link>
         <Link to="/" className="text-lg mx-4 hover:text-blue-900">
