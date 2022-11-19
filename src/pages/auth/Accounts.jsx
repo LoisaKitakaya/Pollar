@@ -4,12 +4,14 @@ import {
   IconDeviceDesktopAnalytics,
 } from "@tabler/icons";
 import { Tabs } from "@mantine/core";
+import { ToastContainer, toast } from "react-toastify";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import PageTitle from "../../pageTitle";
 import RegisterVoter from "../../components/Accounts/RegisterVoter";
 import RegisterOrganizer from "../../components/Accounts/RegisterOrganizer";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const GET_WORKSPACES = gql`
   query GetWorkspaces {
@@ -21,6 +23,14 @@ const GET_WORKSPACES = gql`
 
 const Accounts = () => {
   PageTitle("Accounts");
+
+  const notifyError = (error) =>
+    toast.error(`${error.message}`, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      toastId: "ro-error",
+      className: "bg-error",
+      delay: 500,
+    });
 
   const { loading, error, data } = useQuery(GET_WORKSPACES);
 
@@ -34,8 +44,16 @@ const Accounts = () => {
       return workspaceData.push(space.name);
     });
   }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-52">
+          <img src={loader} className="m-auto" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
+  if (error) notifyError(error);
 
   return (
     <div>
@@ -77,6 +95,10 @@ const Accounts = () => {
       {/* footer */}
       <Footer />
       {/* footer */}
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };
