@@ -1,7 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { gql, useMutation } from "@apollo/client";
 import { ToastContainer, toast } from "react-toastify";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import loader from "../../../assets/Lazy-Loader/loading.svg";
 
@@ -60,18 +60,12 @@ const GET_MY_POLLS = gql`
   }
 `;
 
+const appError = [];
+
 const CreatePoll = ({ openedCreate, setOpenedCreate }) => {
   const theme = useMantineTheme();
 
   const toastElem = useRef(null);
-
-  const notifyError = (error) =>
-    toast.error(`${error.message}`, {
-      position: toast.POSITION.BOTTOM_LEFT,
-      toastId: "ro-error",
-      className: "bg-error",
-      delay: 500,
-    });
 
   const notifyloading = () =>
     (toastElem.current = toast.info("Loading... Please wait", {
@@ -82,6 +76,38 @@ const CreatePoll = ({ openedCreate, setOpenedCreate }) => {
       icon: ({ theme, type }) => <img src={loader} alt="loader" />,
     }));
 
+  const processSuccess = () => {
+    sessionStorage.setItem("errors", JSON.stringify(appError));
+  };
+
+  const processError = (error) => {
+    const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+    errorList.push({ error: error.message });
+
+    sessionStorage.setItem("errors", JSON.stringify(errorList));
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("errors")) {
+      sessionStorage.setItem("errors", JSON.stringify(appError));
+    } else {
+      const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+      if (errorList.length) {
+        let showError = errorList[errorList.length - 1];
+
+        toast.error(`${showError.error}`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          toastId: "ro-error",
+          className: "bg-error",
+        });
+      }
+    }
+  }, []);
+
   const [createPoll, { data, loading, error }] = useMutation(CREATE_POLL, {
     refetchQueries: [
       { query: GET_MY_POLLS }, // DocumentNode object parsed with gql
@@ -90,13 +116,15 @@ const CreatePoll = ({ openedCreate, setOpenedCreate }) => {
 
   if (data) {
     console.log(data);
+
+    processSuccess();
   }
   if (loading) {
     notifyloading();
   } else {
     toast.dismiss(toastElem.current);
   }
-  if (error) notifyError(error);
+  if (error) processError(error);
 
   return (
     <div>

@@ -66,7 +66,7 @@ const RegisterVoter = ({ workspaceData }) => {
       if (errorList.length) {
         let showError = errorList[errorList.length - 1];
 
-        toast.error(`${showError.message}`, {
+        toast.error(`${showError.error}`, {
           position: toast.POSITION.BOTTOM_LEFT,
           toastId: "ro-error",
           className: "bg-error",
