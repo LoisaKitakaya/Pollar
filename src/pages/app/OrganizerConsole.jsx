@@ -15,6 +15,7 @@ import OrganizerProfile from "../../components/Organizer-console/OrganizerProfil
 import OrganizerRules from "../../components/Organizer-console/OrganizerRules";
 import PageTitle from "../../pageTitle";
 import loader from "../../assets/Loading-Image/256x256.gif";
+import Forbidden from "../../components/errors/Forbidden";
 
 const CHECK_MY_ACCOUNT = gql`
   query organizerCheck {
@@ -52,7 +53,7 @@ const OrganizerConsole = () => {
         </div>
       </>
     );
-  if (error) return `Fetching error! ${error.message}`;
+  if (error) return <Forbidden />;
 
   return (
     <div>

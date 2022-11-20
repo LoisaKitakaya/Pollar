@@ -1,0 +1,28 @@
+{
+  "packages": [
+    {
+      "tier_name": "FREE",
+      "poll_limit": 2,
+      "voter_limit": 10,
+      "tier_price": "Free"
+    },
+    {
+      "tier_name": "PRO",
+      "poll_limit": 4,
+      "voter_limit": 100,
+      "tier_price": "KES 15000 / 1 election"
+    },
+    {
+      "tier_name": "BUSINESS",
+      "poll_limit": 8,
+      "voter_limit": 1000,
+      "tier_price": "KES 35000 / 1 election"
+    },
+    {
+      "tier_name": "ENTERPRISE",
+      "poll_limit": 16,
+      "voter_limit": 10000,
+      "tier_price": "KES 65000 / 1 election"
+    }
+  ]
+}

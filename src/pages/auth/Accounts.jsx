@@ -4,12 +4,15 @@ import {
   IconDeviceDesktopAnalytics,
 } from "@tabler/icons";
 import { Tabs } from "@mantine/core";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import PageTitle from "../../pageTitle";
 import RegisterVoter from "../../components/Accounts/RegisterVoter";
 import RegisterOrganizer from "../../components/Accounts/RegisterOrganizer";
+import loader from "../../assets/Loading-Image/256x256.gif";
 
 const GET_WORKSPACES = gql`
   query GetWorkspaces {
@@ -19,8 +22,42 @@ const GET_WORKSPACES = gql`
   }
 `;
 
+const appError = [];
+
 const Accounts = () => {
   PageTitle("Accounts");
+
+  const processSuccess = () => {
+    sessionStorage.setItem("errors", JSON.stringify(appError));
+  };
+
+  const processError = (error) => {
+    const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+    errorList.push({ error: error.message });
+
+    sessionStorage.setItem("errors", JSON.stringify(errorList));
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("errors")) {
+      sessionStorage.setItem("errors", JSON.stringify(appError));
+    } else {
+      const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+      if (errorList.length) {
+        let showError = errorList[errorList.length - 1];
+
+        toast.error(`${showError.error}`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          toastId: "ro-error",
+          className: "bg-error",
+        });
+      }
+    }
+  }, []);
 
   const { loading, error, data } = useQuery(GET_WORKSPACES);
 
@@ -30,12 +67,22 @@ const Accounts = () => {
     console.log(data);
     console.log("Data fetched successfully.");
 
+    processSuccess();
+
     data.allWorkspaces.map((space) => {
       return workspaceData.push(space.name);
     });
   }
-  if (loading) return "Fetching...";
-  if (error) return `Fetching error! ${error.message}`;
+  if (loading) return (
+    <>
+      <div className="h-full w-full">
+        <div className="my-52">
+          <img src={loader} className="m-auto" alt="loader" />
+        </div>
+      </div>
+    </>
+  );
+  if (error) processError(error);
 
   return (
     <div>
@@ -77,6 +124,10 @@ const Accounts = () => {
       {/* footer */}
       <Footer />
       {/* footer */}
+
+      {/* Notification */}
+      <ToastContainer closeButton={false} />
+      {/* Notification */}
     </div>
   );
 };

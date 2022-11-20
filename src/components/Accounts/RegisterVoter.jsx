@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@mantine/core";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import loader from "../../assets/Lazy-Loader/loading.svg";
 
@@ -28,17 +28,11 @@ const REGISTER_VOTER = gql`
   }
 `;
 
+const appError = [];
+
 const RegisterVoter = ({ workspaceData }) => {
   const [workspace, setWorkspace] = useState("");
   const toastElem = useRef(null);
-
-  const notifyError = (error) =>
-    toast.error(`${error.message}`, {
-      position: toast.POSITION.BOTTOM_LEFT,
-      toastId: "rv-error",
-      className: "bg-error",
-      delay: 500,
-    });
 
   const notifyloading = () =>
     (toastElem.current = toast.info("Loading... Please wait", {
@@ -46,10 +40,40 @@ const RegisterVoter = ({ workspaceData }) => {
       toastId: "rv-loading",
       className: "bg-info",
       autoClose: false,
-      icon: ({ theme, type }) => (
-        <img src={loader} alt="loader" />
-      ),
+      icon: ({ theme, type }) => <img src={loader} alt="loader" />,
     }));
+
+  const processSuccess = () => {
+    sessionStorage.setItem("errors", JSON.stringify(appError));
+  };
+
+  const processError = (error) => {
+    const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+    errorList.push({ error: error.message });
+
+    sessionStorage.setItem("errors", JSON.stringify(errorList));
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("errors")) {
+      sessionStorage.setItem("errors", JSON.stringify(appError));
+    } else {
+      const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+      if (errorList.length) {
+        let showError = errorList[errorList.length - 1];
+
+        toast.error(`${showError.error}`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          toastId: "ro-error",
+          className: "bg-error",
+        });
+      }
+    }
+  }, []);
 
   const [registerVoter, { data, loading, error }] = useMutation(REGISTER_VOTER);
 
@@ -58,6 +82,8 @@ const RegisterVoter = ({ workspaceData }) => {
   if (data) {
     console.log(data);
 
+    processSuccess();
+
     navigate("/app/voter_console/");
   }
   if (loading) {
@@ -65,7 +91,7 @@ const RegisterVoter = ({ workspaceData }) => {
   } else {
     toast.dismiss(toastElem.current);
   }
-  if (error) notifyError(error);
+  if (error) processError(error);
 
   return (
     <div className="bg-zinc-100 rounded-lg shadow-md border p-4 w-3/4 m-auto">

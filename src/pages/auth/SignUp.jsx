@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -36,18 +37,44 @@ const REGISTER_USER_ACCOUNT = gql`
   }
 `;
 
+const appError = [];
+
 const SignUp = () => {
   PageTitle("Sign up");
 
   const navigate = useNavigate();
 
-  const notifyError = (error) =>
-    toast.error(`${error.message}`, {
-      position: toast.POSITION.BOTTOM_LEFT,
-      toastId: "ro-error",
-      className: "bg-error",
-      delay: 500,
-    });
+  const processSuccess = () => {
+    sessionStorage.setItem("errors", JSON.stringify(appError));
+  };
+
+  const processError = (error) => {
+    const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+    errorList.push({ error: error.message });
+
+    sessionStorage.setItem("errors", JSON.stringify(errorList));
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("errors")) {
+      sessionStorage.setItem("errors", JSON.stringify(appError));
+    } else {
+      const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+      if (errorList.length) {
+        let showError = errorList[errorList.length - 1];
+
+        toast.error(`${showError.error}`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          toastId: "ro-error",
+          className: "bg-error",
+        });
+      }
+    }
+  }, []);
 
   const [registerUser, { data, loading, error }] = useMutation(
     REGISTER_USER_ACCOUNT
@@ -55,6 +82,8 @@ const SignUp = () => {
 
   if (data) {
     console.log(data);
+
+    processSuccess();
 
     navigate("/auth/signin/");
   }
@@ -68,7 +97,7 @@ const SignUp = () => {
         </div>
       </>
     );
-  if (error) notifyError(error);
+  if (error) processError(error);
 
   return (
     <div>
