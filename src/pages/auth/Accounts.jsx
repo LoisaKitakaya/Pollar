@@ -5,6 +5,7 @@ import {
 } from "@tabler/icons";
 import { Tabs } from "@mantine/core";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -21,16 +22,42 @@ const GET_WORKSPACES = gql`
   }
 `;
 
+const appError = [];
+
 const Accounts = () => {
   PageTitle("Accounts");
 
-  const notifyError = (error) =>
-    toast.error(`${error.message}`, {
-      position: toast.POSITION.BOTTOM_LEFT,
-      toastId: "ro-error",
-      className: "bg-error",
-      delay: 500,
-    });
+  const processSuccess = () => {
+    sessionStorage.setItem("errors", JSON.stringify(appError));
+  };
+
+  const processError = (error) => {
+    const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+    errorList.push({ error: error.message });
+
+    sessionStorage.setItem("errors", JSON.stringify(errorList));
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("errors")) {
+      sessionStorage.setItem("errors", JSON.stringify(appError));
+    } else {
+      const errorList = JSON.parse(sessionStorage.getItem("errors"));
+
+      if (errorList.length) {
+        let showError = errorList[errorList.length - 1];
+
+        toast.error(`${showError.error}`, {
+          position: toast.POSITION.BOTTOM_LEFT,
+          toastId: "ro-error",
+          className: "bg-error",
+        });
+      }
+    }
+  }, []);
 
   const { loading, error, data } = useQuery(GET_WORKSPACES);
 
@@ -39,6 +66,8 @@ const Accounts = () => {
   if (data) {
     console.log(data);
     console.log("Data fetched successfully.");
+
+    processSuccess();
 
     data.allWorkspaces.map((space) => {
       return workspaceData.push(space.name);
@@ -53,7 +82,7 @@ const Accounts = () => {
       </div>
     </>
   );
-  if (error) notifyError(error);
+  if (error) processError(error);
 
   return (
     <div>

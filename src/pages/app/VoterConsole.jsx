@@ -9,6 +9,7 @@ import VoterPolls from "../../components/Voter-console/VoterPolls";
 import VoterProfile from "../../components/Voter-console/VoterProfile";
 import VoterControls from "../../components/VoterControls";
 import loader from "../../assets/Loading-Image/256x256.gif";
+import Forbidden from "../../components/errors/Forbidden";
 
 const CHECK_MY_ACCOUNT = gql`
   query voterCheck {
@@ -51,7 +52,7 @@ const VoterConsole = () => {
         </div>
       </>
     );
-  if (error) return `Fetching error! ${error.message}`;
+  if (error) return <Forbidden />;
 
   return (
     <div>
