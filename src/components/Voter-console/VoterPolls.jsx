@@ -1,5 +1,10 @@
 import { ThemeIcon, Tooltip } from "@mantine/core";
-import { IconEye, IconArchive, IconFileAnalytics } from "@tabler/icons";
+import {
+  IconEye,
+  IconArchive,
+  IconFileAnalytics,
+  IconPrinter,
+} from "@tabler/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -130,6 +135,17 @@ const VoterPolls = ({ organizerID }) => {
                           <Link to={`/app/results/${poll.id}`} target="_blank">
                             <IconFileAnalytics />
                           </Link>
+                        </ThemeIcon>
+                      </Tooltip>
+                      <Tooltip label="Generate report" color="dark" withArrow>
+                        <ThemeIcon
+                          variant="fill"
+                          color="teal"
+                          radius="md"
+                          size="lg"
+                          className="cursor-pointer mx-1"
+                        >
+                          <IconPrinter />
                         </ThemeIcon>
                       </Tooltip>
                       {poll.open ? (
