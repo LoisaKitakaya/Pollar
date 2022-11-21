@@ -78,13 +78,15 @@ const DeletePoll = ({ PollID }) => {
           radius="md"
           size="lg"
           className="cursor-pointer mx-1"
-          onClick={() =>
-            deletePoll({
-              variables: {
-                id: PollID,
-              },
-            })
-          }
+          onClick={() => {
+            if (window.confirm("Are you sure you about this?") === true) {
+              deletePoll({
+                variables: {
+                  id: PollID,
+                },
+              });
+            }
+          }}
         >
           <IconTrash />
         </ThemeIcon>
