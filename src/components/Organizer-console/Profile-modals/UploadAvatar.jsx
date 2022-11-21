@@ -2,7 +2,7 @@ import { Modal, useMantineTheme } from "@mantine/core";
 
 import axios from "axios";
 
-const url = "http://127.0.0.1:8000/organizers/avatar/";
+const url = "https://democracy-app.up.railway.app/organizers/avatar/";
 
 const UploadAvatar = ({
   opened,

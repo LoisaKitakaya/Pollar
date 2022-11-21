@@ -3,7 +3,7 @@ import { Loader, Tooltip } from "@mantine/core";
 
 import axios from "axios";
 
-const url = "http://127.0.0.1:8000/voters/avatar/";
+const url = "https://democracy-app.up.railway.app/voters/avatar/";
 
 const VoterImage = ({ voterID }) => {
   const [isLoading, setIsLoading] = useState(false);

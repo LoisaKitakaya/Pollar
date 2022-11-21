@@ -6,7 +6,7 @@ import axios from "axios";
 
 import UploadAvatar from "../Organizer-console/Profile-modals/UploadAvatar";
 
-const url = "http://127.0.0.1:8000/organizers/avatar/";
+const url = "https://democracy-app.up.railway.app/organizers/avatar/";
 
 const OrganizerAvatar = ({ organizerID }) => {
   const [opened, setOpened] = useState(false);
