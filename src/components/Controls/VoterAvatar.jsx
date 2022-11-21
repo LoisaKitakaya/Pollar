@@ -6,7 +6,7 @@ import axios from "axios";
 
 import AvatarUpload from "../Voter-console/Profile-modals/AvatarUpload";
 
-const url = "http://127.0.0.1:8000/voters/avatar/";
+const url = "https://democracy-app.up.railway.app/voters/avatar/";
 
 const VoterAvatar = ({ voterID }) => {
   const [opened, setOpened] = useState(false);
