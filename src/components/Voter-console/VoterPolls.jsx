@@ -146,7 +146,7 @@ const VoterPolls = ({ organizerID }) => {
                           className="cursor-pointer mx-1"
                         >
                           <a
-                            href={`http://127.0.0.1:8000/report/pdf/${poll.id}`}
+                            href={`https://democracy-app.up.railway.app/report/pdf/${poll.id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
