@@ -86,13 +86,15 @@ const DeleteCandidate = ({ candidateData }) => {
           radius="sm"
           size="sm"
           className="cursor-pointer flex items-center z-50"
-          onClick={() =>
-            deleteCandidate({
-              variables: {
-                id: candidateData.id,
-              },
-            })
-          }
+          onClick={() => {
+            if (window.confirm("Are you sure you about this?") === true) {
+              deleteCandidate({
+                variables: {
+                  id: candidateData.id,
+                },
+              });
+            }
+          }}
         >
           <IconTrash />
         </ThemeIcon>
