@@ -145,7 +145,13 @@ const VoterPolls = ({ organizerID }) => {
                           size="lg"
                           className="cursor-pointer mx-1"
                         >
-                          <IconPrinter />
+                          <a
+                            href={`http://127.0.0.1:8000/report/pdf/${poll.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <IconPrinter />
+                          </a>
                         </ThemeIcon>
                       </Tooltip>
                       {poll.open ? (
